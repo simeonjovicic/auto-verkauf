@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ink: #0a0a0a;
+  --color-bone: #f5f5f4;
+  --color-mute: #a1a1aa;
+  --color-gold: #c8a45c;
+  --color-line: rgb(245 245 244 / 0.08);
+
+  --color-hero-teal: #7ec8c8;
+  --color-hero-cream: #e8d49a;
+  --color-hero-blush: #d99891;
+  --color-hero-sage: #a8c4a2;
+  --color-hero-sky: #9bb8d4;
+  --color-hero-slate: #8a8d94;
+
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-color: #0a0a0a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-ink);
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 1px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-feature-settings: "ss01";
+}
+
+.hairline {
+  border-color: var(--color-line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
