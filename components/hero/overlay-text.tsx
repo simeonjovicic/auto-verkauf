@@ -14,14 +14,14 @@ export function OverlayText() {
       <div className="flex flex-1 items-center">
         <div
           className="max-w-3xl text-bone"
-          style={{ textShadow: "0 2px 28px rgba(0,0,0,0.6)" }}
+          style={{ textShadow: "0 2px 32px rgba(0,0,0,0.85)" }}
         >
           <h1 className="text-5xl font-black uppercase leading-[0.88] tracking-tight sm:text-7xl lg:text-[7.5rem]">
             Getrieben von
             <br />
             Exzellenz.
           </h1>
-          <p className="mt-5 text-[11px] uppercase tracking-[0.28em] text-bone/65 sm:mt-6">
+          <p className="mt-5 text-[11px] uppercase tracking-[0.28em] text-bone/90 sm:mt-6">
             Die feinsten Automobile Wiens
           </p>
 
@@ -34,7 +34,7 @@ export function OverlayText() {
             </a>
             <a
               href="/kontakt"
-              className="group inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-bone/85 transition-colors hover:text-bone"
+              className="group inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-bone transition-colors hover:text-gold"
             >
               <span>Fahrzeug verkaufen</span>
               <span className="transition-transform duration-300 group-hover:translate-x-1">
@@ -48,7 +48,7 @@ export function OverlayText() {
       {/* Bottom stats bar */}
       <div
         className="pb-10 sm:pb-14"
-        style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}
+        style={{ textShadow: "0 1px 12px rgba(0,0,0,0.8)" }}
       >
         <div className="grid grid-cols-2 border-t border-bone/10 sm:grid-cols-4">
           {STATS.map((stat) => (
@@ -59,7 +59,7 @@ export function OverlayText() {
               <p className="text-lg font-bold uppercase tracking-wide text-bone sm:text-xl">
                 {stat.value}
               </p>
-              <p className="mt-0.5 text-[10px] uppercase tracking-[0.2em] text-bone/50">
+              <p className="mt-0.5 text-[10px] uppercase tracking-[0.2em] text-bone/80">
                 {stat.label}
               </p>
             </div>
