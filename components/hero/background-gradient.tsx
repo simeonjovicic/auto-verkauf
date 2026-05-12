@@ -20,10 +20,10 @@ export function BackgroundGradient() {
       />
       {/* bottom scrim */}
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[48%]"
         style={{
           background:
-            "linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.6) 30%, rgba(10,10,10,0.2) 65%, transparent 100%)",
+            "linear-gradient(to top, rgba(10,10,10,0.78) 0%, rgba(10,10,10,0.5) 38%, rgba(10,10,10,0.12) 74%, transparent 100%)",
         }}
       />
       {/* top scrim */}

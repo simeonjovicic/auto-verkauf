@@ -4,7 +4,7 @@ import type { Vehicle } from "@/lib/vehicles";
 
 export function InquiryCta({ vehicle }: { vehicle: Vehicle }) {
   const subject = `Anfrage: ${vehicle.name} ${vehicle.subtitle}`;
-  const body = `Sehr geehrter Herr Meyer,\n\nich interessiere mich für den ${vehicle.name} ${vehicle.subtitle} (${vehicle.num}).\n\nBitte senden Sie mir weitere Informationen und einen Besichtigungstermin.\n\nMit freundlichen Grüssen,\n`;
+  const body = `Sehr geehrter Herr Meyer,\n\nich interessiere mich für den ${vehicle.name} ${vehicle.subtitle}.\n\nBitte senden Sie mir weitere Informationen und einen Besichtigungstermin.\n\nMit freundlichen Grüssen,\n`;
   const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   return (

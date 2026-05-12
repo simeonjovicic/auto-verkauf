@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter_Tight, Fraunces } from "next/font/google";
-import { SmoothScroll } from "@/components/smooth-scroll";
 import { Header } from "@/components/nav/header";
 import "./globals.css";
 
@@ -56,7 +55,6 @@ export default function RootLayout({
       className={`${interTight.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-ink text-bone font-sans">
-        <SmoothScroll />
         <Header />
         {children}
       </body>

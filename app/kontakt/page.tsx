@@ -15,7 +15,7 @@ export default function KontaktPage() {
   return (
     <>
       <PageHero
-        eyebrow="05 · Kontakt"
+        eyebrow="Kontakt"
         title="Sprechen Sie mit uns."
         lede="Termin nach Vereinbarung. Anfragen werden persönlich beantwortet — meist innerhalb desselben Tages."
       />

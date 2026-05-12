@@ -1,3 +1,4 @@
+import { AnimatedStats } from "./animated-stats";
 import { ParallaxImage } from "./parallax-image";
 import { getVehicle } from "@/lib/vehicles";
 
@@ -7,66 +8,82 @@ export function Philosophy() {
   return (
     <section
       id="philosophie"
-      className="relative border-t border-line bg-ink"
+      className="relative overflow-hidden bg-showroom text-graphite"
       aria-labelledby="philosophie-title"
     >
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-y-16 px-6 py-24 sm:px-12 lg:grid-cols-12 lg:gap-x-16 lg:px-20 lg:py-32">
-        <div className="lg:col-span-7 lg:pr-12">
-          <p className="eyebrow">02 · Philosophie</p>
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-28 sm:h-32 lg:h-36"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(10,10,10,0.82) 0%, rgba(17,24,32,0.56) 28%, rgba(93,107,120,0.22) 66%, rgba(244,247,249,0) 100%)",
+        }}
+      />
+      <div className="relative mx-auto grid max-w-[1440px] grid-cols-1 gap-y-14 px-6 pb-20 pt-28 sm:px-12 sm:pt-32 lg:grid-cols-12 lg:gap-x-16 lg:px-20 lg:pb-28 lg:pt-36">
+        <div className="lg:col-span-6 lg:pr-8">
+          <p className="eyebrow !text-signal">Autohaus in Wien</p>
           <h2
             id="philosophie-title"
-            className="serif mt-6 text-4xl leading-[1.05] text-bone sm:text-5xl lg:text-6xl"
+            className="serif mt-6 text-4xl leading-[1.05] text-graphite sm:text-5xl lg:text-6xl"
           >
-            Handverlesen. <span className="italic text-bone/70">Substanz</span>{" "}
-            statt Spekulation.
+            Hell, klar, persönlich.{" "}
+            <span className="italic text-steel">Ein Bestand mit Substanz.</span>
           </h2>
-          <div className="mt-10 max-w-prose space-y-6 text-mute leading-relaxed">
+          <div className="mt-10 max-w-prose space-y-5 text-base leading-relaxed text-steel sm:text-lg">
             <p>
-              Seit über vier Jahrzehnten kuratiert Manfred Meyer in Wien eine
-              Sammlung, die jenseits des Marktwerts steht. Jeder Wagen wird
-              einzeln ausgewählt — auf Zustand, Provenienz und Charakter
-              geprüft.
+              Meyer Motorsport verbindet die Erfahrung eines spezialisierten
+              Sportwagenhauses mit einer ruhigen, transparenten Beratung. Jeder
+              Wagen wird einzeln geprüft, dokumentiert und in Wien persönlich
+              vorgestellt.
             </p>
             <p>
-              Ferrari, Porsche, BMW M — Sportwagen, die ihre Zeit überdauern,
-              weil sie nie für den Massengeschmack gebaut wurden. Wir kaufen
-              nicht, was sich verkauft. Wir kaufen, was bleibt.
+              Ferrari, Porsche und BMW M bleiben hier nicht anonyme Inserate,
+              sondern nachvollziehbare Fahrzeuge: Zustand, Historie, Laufleistung
+              und Charakter werden vor Ort gemeinsam besprochen.
             </p>
             <p>
-              Diskretion, vollständige Historie, und ein Bestand, den man nicht
-              im Internet zusammensucht: das ist Meyer Motorsport.
+              So entsteht ein Autohaus-Erlebnis, das heller und direkter wirkt:
+              kurze Wege, klare Antworten und ein Bestand, der nicht nach Masse,
+              sondern nach Qualität zusammengestellt ist.
             </p>
           </div>
-          <div className="mt-12 grid grid-cols-2 gap-x-10 gap-y-6 border-t border-line pt-10 text-bone sm:grid-cols-4">
-            <Stat label="Jahre" value="40+" />
-            <Stat label="Fahrzeuge p.a." value="≈ 30" />
-            <Stat label="Standort" value="Wien" />
-            <Stat label="Marken" value="Ferrari · Porsche · BMW M" />
-          </div>
+          <AnimatedStats />
         </div>
-        <div className="lg:col-span-5">
-          <ParallaxImage
-            src={accent.src}
-            srcAvif={accent.srcAvif}
-            alt={accent.alt}
-            width={accent.width}
-            height={accent.height}
-            className="aspect-[3/4] w-full border border-line"
-          />
-          <p className="mt-4 text-xs uppercase tracking-[0.2em] text-mute">
-            {accent.name} {accent.subtitle} — aus aktuellem Bestand
-          </p>
+        <div className="lg:col-span-6">
+          <div className="overflow-hidden rounded-[8px] border border-chrome bg-panel shadow-[0_24px_70px_rgba(17,24,32,0.12)]">
+            <ParallaxImage
+              src={accent.src}
+              srcAvif={accent.srcAvif}
+              alt={accent.alt}
+              width={accent.width}
+              height={accent.height}
+              className="aspect-[4/3] w-full bg-showroom-soft"
+            />
+            <div className="grid gap-4 border-t border-chrome p-5 sm:grid-cols-[1.2fr_0.8fr] sm:p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-graphite">
+                {accent.name} {accent.subtitle}
+              </p>
+              <p className="text-sm leading-relaxed text-steel sm:text-right">
+                Aktueller Bestand, Besichtigung nach Vereinbarung.
+              </p>
+            </div>
+          </div>
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <Feature label="Historie" value="nachvollziehbar" />
+            <Feature label="Besichtigung" value="in Wien" />
+            <Feature label="Anfrage" value="direkt persönlich" />
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Feature({ label, value }: { label: string; value: string }) {
   return (
-    <div>
-      <p className="text-[11px] uppercase tracking-[0.2em] text-mute">{label}</p>
-      <p className="serif mt-2 text-2xl text-bone">{value}</p>
+    <div className="rounded-[8px] border border-chrome bg-panel px-4 py-4">
+      <p className="text-[10px] uppercase tracking-[0.2em] text-signal">{label}</p>
+      <p className="mt-2 text-sm font-medium text-graphite">{value}</p>
     </div>
   );
 }

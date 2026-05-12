@@ -1,46 +1,197 @@
+"use client";
+
 import Link from "next/link";
+import {
+  useRef,
+  type CSSProperties,
+  type MouseEvent,
+  type PointerEvent,
+} from "react";
 import type { Vehicle, Gradient } from "@/lib/vehicles";
 
 const ACCENT: Record<Gradient, string> = {
   "hero-teal":  "#7ec8c8",
   "hero-cream": "#e8d49a",
-  "hero-blush": "#d99891",
+  "hero-blush": "#c9151b",
   "hero-sage":  "#a8c4a2",
   "hero-sky":   "#9bb8d4",
   "hero-slate": "#8a8d94",
 };
 
-type SpecItem = { label: string; value: string };
+const ENGINE: Record<string, string> = {
+  "ferrari-488-spider": "3.9 V8 Biturbo",
+  "ferrari-488-pista": "3.9 V8 Biturbo",
+  "ferrari-458-speciale-aperta": "4.5 V8 Sauger",
+  "porsche-718-spyder-4-0": "4.0 Boxer",
+  "bmw-z3-m-coupe-s54": "S54 Reihen-6",
+};
 
-function getCardSpecs(vehicle: Vehicle): SpecItem[] {
-  const items: SpecItem[] = [];
-  if (vehicle.specs.year) items.push({ label: "Baujahr", value: vehicle.specs.year });
-  if (vehicle.specs.mileage) items.push({ label: "Kilometerstand", value: vehicle.specs.mileage });
-  if (vehicle.specs.horsepower) items.push({ label: "Leistung", value: vehicle.specs.horsepower });
-  if (vehicle.specs.transmission) items.push({ label: "Getriebe", value: vehicle.specs.transmission });
-  return items;
+type MotionValues = {
+  rotateX: string;
+  rotateY: string;
+  shiftX: string;
+  shiftY: string;
+  imageX: string;
+  imageY: string;
+  hoverImageX: string;
+  hoverImageY: string;
+  glareX: string;
+  glareY: string;
+};
+
+type CardStyle = CSSProperties & {
+  "--vehicle-card-accent": string;
+  "--card-rotate-x": string;
+  "--card-rotate-y": string;
+  "--card-shift-x": string;
+  "--card-shift-y": string;
+  "--card-lift": string;
+  "--card-image-x": string;
+  "--card-image-y": string;
+  "--card-hover-image-x": string;
+  "--card-hover-image-y": string;
+  "--card-glare-x": string;
+  "--card-glare-y": string;
+};
+
+const REST_MOTION: MotionValues = {
+  rotateX: "0deg",
+  rotateY: "0deg",
+  shiftX: "0px",
+  shiftY: "0px",
+  imageX: "0px",
+  imageY: "0px",
+  hoverImageX: "0px",
+  hoverImageY: "0px",
+  glareX: "50%",
+  glareY: "42%",
+};
+
+function writeMotion(node: HTMLElement, values: MotionValues) {
+  node.style.setProperty("--card-rotate-x", values.rotateX);
+  node.style.setProperty("--card-rotate-y", values.rotateY);
+  node.style.setProperty("--card-shift-x", values.shiftX);
+  node.style.setProperty("--card-shift-y", values.shiftY);
+  node.style.setProperty("--card-image-x", values.imageX);
+  node.style.setProperty("--card-image-y", values.imageY);
+  node.style.setProperty("--card-hover-image-x", values.hoverImageX);
+  node.style.setProperty("--card-hover-image-y", values.hoverImageY);
+  node.style.setProperty("--card-glare-x", values.glareX);
+  node.style.setProperty("--card-glare-y", values.glareY);
 }
 
-export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
+type Props = {
+  vehicle: Vehicle;
+  onOpen?: (vehicle: Vehicle) => void;
+};
+
+export function VehicleCard({ vehicle, onOpen }: Props) {
+  const cardRef = useRef<HTMLAnchorElement>(null);
+  const frameRef = useRef<number | null>(null);
+  const motionRef = useRef<MotionValues>(REST_MOTION);
   const accent = ACCENT[vehicle.gradient];
-  const specs = getCardSpecs(vehicle);
+  const engine = ENGINE[vehicle.slug];
+  const powerLine = [vehicle.specs.horsepower, engine].filter(Boolean).join(" · ");
+  const cardStyle: CardStyle = {
+    "--vehicle-card-accent": accent,
+    "--card-rotate-x": REST_MOTION.rotateX,
+    "--card-rotate-y": REST_MOTION.rotateY,
+    "--card-shift-x": REST_MOTION.shiftX,
+    "--card-shift-y": REST_MOTION.shiftY,
+    "--card-lift": "0px",
+    "--card-image-x": REST_MOTION.imageX,
+    "--card-image-y": REST_MOTION.imageY,
+    "--card-hover-image-x": REST_MOTION.hoverImageX,
+    "--card-hover-image-y": REST_MOTION.hoverImageY,
+    "--card-glare-x": REST_MOTION.glareX,
+    "--card-glare-y": REST_MOTION.glareY,
+    transform:
+      "perspective(900px) rotateX(var(--card-rotate-x)) rotateY(var(--card-rotate-y)) translate3d(var(--card-shift-x), calc(var(--card-shift-y) + var(--card-lift)), 0)",
+    transformStyle: "preserve-3d",
+  };
+
+  function queueMotion(values: MotionValues) {
+    motionRef.current = values;
+    if (frameRef.current !== null) return;
+
+    frameRef.current = requestAnimationFrame(() => {
+      frameRef.current = null;
+      const node = cardRef.current;
+      if (node) writeMotion(node, motionRef.current);
+    });
+  }
+
+  function resetMotion() {
+    if (frameRef.current !== null) {
+      cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
+    }
+
+    motionRef.current = REST_MOTION;
+    const node = cardRef.current;
+    if (node) writeMotion(node, REST_MOTION);
+  }
+
+  function handlePointerMove(event: PointerEvent<HTMLAnchorElement>) {
+    if (event.pointerType !== "mouse") return;
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+
+    queueMotion({
+      rotateX: `${(-y * 5).toFixed(2)}deg`,
+      rotateY: `${(x * 7).toFixed(2)}deg`,
+      shiftX: `${(x * 3).toFixed(2)}px`,
+      shiftY: `${(y * 2).toFixed(2)}px`,
+      imageX: `${(-x * 10).toFixed(2)}px`,
+      imageY: `${(-y * 8).toFixed(2)}px`,
+      hoverImageX: `${(-x * 14).toFixed(2)}px`,
+      hoverImageY: `${(-y * 11).toFixed(2)}px`,
+      glareX: `${((x + 1) * 50).toFixed(1)}%`,
+      glareY: `${((y + 1) * 50).toFixed(1)}%`,
+    });
+  }
+
+  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
+    if (!onOpen) return;
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.shiftKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    onOpen(vehicle);
+  }
 
   return (
     <Link
+      ref={cardRef}
       href={`/fahrzeuge/${vehicle.slug}`}
-      className="group relative flex flex-col overflow-hidden bg-ink"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[8px] border border-chrome bg-panel text-graphite shadow-[0_16px_46px_rgba(17,24,32,0.08)] transition-[border-color,box-shadow,transform] duration-300 ease-out motion-safe:will-change-transform hover:[--card-lift:-4px] hover:border-graphite/30 hover:shadow-[0_28px_80px_rgba(17,24,32,0.16)]"
       aria-label={`${vehicle.name} ${vehicle.subtitle} — Details ansehen`}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetMotion}
+      onBlur={resetMotion}
+      onClick={handleClick}
+      style={cardStyle}
     >
-      {/* Top accent — hairline that intensifies on hover */}
       <div
         aria-hidden
-        className="absolute inset-x-0 top-0 z-20 h-px transition-all duration-700 ease-out group-hover:h-0.5"
-        style={{ background: `linear-gradient(to right, ${accent} 0%, ${accent}66 60%, transparent 100%)` }}
+        className="absolute inset-x-0 top-0 z-20 h-1"
+        style={{
+          background:
+            "linear-gradient(to right, var(--vehicle-card-accent) 0%, color-mix(in srgb, var(--vehicle-card-accent) 40%, transparent) 60%, transparent 100%)",
+        }}
       />
 
-      {/* ─────────────  IMAGE STAGE  ───────────── */}
-      <div className="relative aspect-4/3 overflow-hidden bg-[#0e0e0e]">
-        {/* Primary */}
+      <div className="relative aspect-[4/3] overflow-hidden bg-showroom-soft [transform-style:preserve-3d]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={vehicle.src}
@@ -50,14 +201,16 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
           loading="lazy"
           decoding="async"
           draggable={false}
-          className="absolute inset-0 h-full w-full object-cover transition-all duration-900 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.04] select-none"
+          className="absolute inset-0 h-full w-full object-cover transition-[transform] duration-300 ease-out select-none"
           style={{
             backgroundImage: `url(${vehicle.blurDataURL})`,
             backgroundSize: "cover",
+            backgroundPosition: "center",
+            transform:
+              "translate3d(var(--card-image-x), var(--card-image-y), 34px) scale(1.045)",
           }}
         />
 
-        {/* Crossfade — alternate angle */}
         {vehicle.srcHover && (
           /* eslint-disable-next-line @next/next/no-img-element */
           <img
@@ -69,117 +222,54 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
             loading="lazy"
             decoding="async"
             draggable={false}
-            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-all duration-900 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.04] group-hover:opacity-100 select-none"
+            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-[opacity,transform] duration-300 ease-out group-hover:opacity-100 select-none"
+            style={{
+              transform:
+                "translate3d(var(--card-hover-image-x), var(--card-hover-image-y), 46px) scale(1.06)",
+            }}
           />
         )}
 
-        {/* Vignette */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0"
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
-              "linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.45) 30%, transparent 70%)",
+              "radial-gradient(circle at var(--card-glare-x) var(--card-glare-y), rgba(255,255,255,0.26), rgba(255,255,255,0.08) 18%, transparent 42%)",
+            transform: "translateZ(58px)",
           }}
         />
-
-        {/* Index number */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute bottom-5 left-7 font-mono text-[10px] tracking-[0.4em] text-bone/25 select-none transition-colors duration-500 group-hover:text-bone/45"
-        >
-          {vehicle.num}
-        </span>
-
-        {/* Car color */}
-        {vehicle.specs.color && (
-          <span
-            aria-hidden
-            className="pointer-events-none absolute bottom-5 right-7 text-[10px] uppercase tracking-[0.25em] text-bone/30 select-none transition-colors duration-500 group-hover:text-bone/55"
-          >
-            {vehicle.specs.color}
-          </span>
-        )}
       </div>
 
-      {/* ─────────────  INFO  ───────────── */}
-      <div className="relative flex flex-col gap-7 px-7 pb-9 pt-8 sm:px-9 sm:pb-10 sm:pt-9">
-        {/* Subtle accent bleed */}
+      <div className="relative min-h-[118px] px-5 pb-6 pt-5 sm:px-6 sm:pt-6">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-          style={{ background: `linear-gradient(155deg, ${accent}0d 0%, transparent 55%)` }}
+          style={{
+            background:
+              "linear-gradient(155deg, color-mix(in srgb, var(--vehicle-card-accent) 13%, transparent) 0%, transparent 58%)",
+          }}
         />
 
-        {/* Title block */}
         <div className="relative">
-          <div className="mb-4 flex items-center gap-3">
-            <span
-              aria-hidden
-              className="block h-px w-5 transition-all duration-500 ease-out group-hover:w-9"
-              style={{ background: accent }}
-            />
-            <p
-              className="text-[10px] font-semibold uppercase tracking-[0.3em]"
-              style={{ color: accent }}
-            >
-              {vehicle.brand}
+          <div className="min-w-0">
+            <h3 className="serif text-[30px] leading-[1.02] text-graphite sm:text-[34px]">
+              {vehicle.name}
+            </h3>
+            <p className="serif mt-1.5 text-2xl italic leading-tight text-steel">
+              {vehicle.subtitle}
             </p>
+            {powerLine ? (
+              <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-graphite/60">
+                {powerLine}
+              </p>
+            ) : null}
           </div>
-
-          <h3 className="serif text-[28px] leading-[1.05] text-bone sm:text-[32px] lg:text-[34px]">
-            {vehicle.name}
-          </h3>
-          <p className="serif mt-1.5 text-xl italic leading-tight text-bone/40 sm:text-2xl">
-            {vehicle.subtitle}
-          </p>
-
-          {/* Highlight tagline */}
-          {vehicle.highlight && (
-            <p className="mt-5 text-[11px] uppercase tracking-[0.22em] text-bone/55">
-              {vehicle.highlight}
-            </p>
-          )}
-        </div>
-
-        {/* Specs grid — 2×2 */}
-        {specs.length > 0 && (
-          <dl className="relative grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-6">
-            {specs.map((spec) => (
-              <div key={spec.label} className="flex flex-col gap-1">
-                <dd className="text-[15px] font-medium leading-tight text-bone">
-                  {spec.value}
-                </dd>
-                <dt className="text-[9px] uppercase tracking-[0.25em] text-bone/35">
-                  {spec.label}
-                </dt>
-              </div>
-            ))}
-          </dl>
-        )}
-
-        {/* CTA row — price + details */}
-        <div className="relative flex items-center justify-between gap-4 border-t border-line pt-5">
-          <div className="flex flex-col gap-0.5">
-            <span className="text-[9px] uppercase tracking-[0.28em] text-bone/40">
-              Preis
-            </span>
-            <span className="text-[13px] font-medium text-bone/75">
-              Auf Anfrage
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-bone/55 transition-colors duration-500 group-hover:text-bone">
-              Details ansehen
-            </span>
-            <span
-              aria-hidden
-              className="text-base leading-none text-bone/40 transition-all duration-500 group-hover:translate-x-1.5 group-hover:text-gold"
-            >
-              →
-            </span>
-          </div>
+          <div
+            aria-hidden
+            className="mt-5 h-1 w-14 rounded-full transition-all duration-500 group-hover:w-24"
+            style={{ background: "var(--vehicle-card-accent)" }}
+          />
         </div>
       </div>
     </Link>

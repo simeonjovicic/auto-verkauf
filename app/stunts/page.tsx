@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const showcase =
-  vehicles.find((v) => v.slug === "porsche-996-gt3-rs") ?? vehicles[0];
+  vehicles.find((v) => v.slug === "porsche-718-spyder-4-0") ?? vehicles[0];
 
 const PRODUCTIONS = [
   { year: "2023", title: "Internationale TV-Werbung", role: "Picture car" },
@@ -24,7 +24,7 @@ export default function StuntsPage() {
   return (
     <>
       <PageHero
-        eyebrow="04 · Film & Werbung"
+        eyebrow="Film & Werbung"
         title="Autos, die ihren Auftritt kennen."
         lede="Wir stellen Fahrzeuge und Fahrer für Film-, Werbe- und Bühnenproduktionen. Mit Sorgfalt, Versicherung und einer Erfahrung, die nur Jahrzehnte hinter dem Lenkrad bringen."
       />

@@ -16,7 +16,7 @@ export default function VipsPage() {
   return (
     <>
       <PageHero
-        eyebrow="03 · Service"
+        eyebrow="Service"
         title="Diskret, persönlich, verbindlich."
         lede="Seit vier Jahrzehnten betreuen wir Sammler, Persönlichkeiten und Unternehmen mit dem gleichen Anspruch — Vertraulichkeit und kompromisslose Sorgfalt vom ersten Gespräch an."
       />

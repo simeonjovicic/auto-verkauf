@@ -14,11 +14,12 @@ export default function FahrzeugePage() {
   return (
     <>
       <PageHero
-        eyebrow="01 · Bestand"
-        title="Fahrzeuge."
-        lede={`Aktuell ${vehicles.length} Sammlerstücke. Jedes Auto persönlich verlesen, dokumentiert und in Wien einsehbar. Preise auf Anfrage.`}
+        eyebrow="Bestand"
+        title="Fahrzeuge im Überblick."
+        lede={`Aktuell ${vehicles.length} geprüfte Fahrzeuge in Wien. Helle Übersicht, klare Daten und direkte Anfrage für Besichtigung oder Probefahrt.`}
+        tone="light"
       />
-      <section className="bg-ink px-6 py-16 sm:px-12 sm:py-20 lg:px-20">
+      <section className="bg-panel px-6 py-14 text-graphite sm:px-12 sm:py-[72px] lg:px-20">
         <div className="mx-auto max-w-[1440px]">
           <VehicleGrid />
         </div>

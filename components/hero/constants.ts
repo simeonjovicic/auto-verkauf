@@ -3,7 +3,7 @@ import type { Gradient } from "@/lib/vehicles";
 export const GRADIENT_COLORS: Record<Gradient, string> = {
   "hero-teal": "#7ec8c8",
   "hero-cream": "#e8d49a",
-  "hero-blush": "#d99891",
+  "hero-blush": "#c9151b",
   "hero-sage": "#a8c4a2",
   "hero-sky": "#9bb8d4",
   "hero-slate": "#8a8d94",

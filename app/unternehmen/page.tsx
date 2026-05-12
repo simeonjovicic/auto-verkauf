@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const portrait =
-  vehicles.find((v) => v.slug === "porsche-996-gt3-rs") ?? vehicles[0];
+  vehicles.find((v) => v.slug === "porsche-718-spyder-4-0") ?? vehicles[0];
 
 const STATS = [
   { value: "1983", label: "Gegründet" },
@@ -24,7 +24,7 @@ export default function UnternehmenPage() {
   return (
     <>
       <PageHero
-        eyebrow="02 · Über uns"
+        eyebrow="Über uns"
         title="Vier Jahrzehnte Sportwagen — eine Adresse."
         lede="Meyer Motorsport ist ein Familienbetrieb in Wien-Favoriten. Was 1983 mit einer Leidenschaft für italienische Sportwagen begann, ist heute eine der ältesten Adressen Österreichs für ausgewählte Ferrari, Porsche und BMW M Sammlerstücke."
       />

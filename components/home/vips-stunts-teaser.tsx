@@ -24,31 +24,32 @@ const CARDS: Card[] = [
     title: "Stunts",
     copy:
       "Bereitstellung und Vorbereitung von Sport- und Sammlerfahrzeugen für internationale Filmproduktionen.",
-    imageSlug: "porsche-996-gt3-rs",
+    imageSlug: "porsche-718-spyder-4-0",
   },
 ];
 
 export function VipsStuntsTeaser() {
   return (
     <section
-      className="relative border-t border-line bg-ink"
+      className="relative border-t border-chrome bg-showroom text-graphite"
       aria-label="VIPs und Stunts"
     >
-      <div className="mx-auto max-w-[1440px] px-6 py-24 sm:px-12 lg:px-20 lg:py-32">
-        <p className="eyebrow">04 · Auftritte</p>
-        <h2 className="serif mt-6 max-w-3xl text-4xl leading-[1.05] text-bone sm:text-5xl lg:text-6xl">
-          Mehr als ein Showroom.
+      <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-12 lg:px-20 lg:py-28">
+        <p className="eyebrow !text-signal">Leistungen</p>
+        <h2 className="serif mt-6 max-w-3xl text-4xl leading-[1.05] text-graphite sm:text-5xl lg:text-6xl">
+          Mehr als Verkauf:{" "}
+          <span className="italic text-steel">Fahrzeuge mit Einsatzgeschichte.</span>
         </h2>
-        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
+        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
           {CARDS.map((c) => {
             const v = getVehicle(c.imageSlug)!;
             return (
               <Link
                 key={c.href}
                 href={c.href}
-                className="group relative block overflow-hidden border border-line"
+                className="group relative block overflow-hidden rounded-[8px] border border-chrome bg-panel shadow-[0_18px_50px_rgba(17,24,32,0.08)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_26px_70px_rgba(17,24,32,0.14)]"
               >
-                <div className="relative aspect-[4/3] sm:aspect-[16/10]">
+                <div className="relative aspect-[4/3] overflow-hidden bg-showroom-soft sm:aspect-[16/10]">
                   <picture>
                     <source srcSet={v.srcAvif} type="image/avif" />
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -63,18 +64,16 @@ export function VipsStuntsTeaser() {
                       className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04] select-none"
                     />
                   </picture>
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent"
-                  />
                 </div>
-                <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-12">
-                  <p className="eyebrow mb-3 !text-bone/80">{c.eyebrow}</p>
-                  <h3 className="serif text-4xl text-bone sm:text-5xl lg:text-6xl">
+                <div className="p-7 sm:p-8 lg:p-10">
+                  <p className="eyebrow mb-3 !text-signal">{c.eyebrow}</p>
+                  <h3 className="serif text-4xl text-graphite sm:text-5xl">
                     {c.title}
                   </h3>
-                  <p className="mt-4 max-w-md text-mute">{c.copy}</p>
-                  <span className="mt-6 inline-flex items-baseline gap-3 text-[11px] uppercase tracking-[0.2em] text-bone group-hover:text-gold">
+                  <p className="mt-4 max-w-md text-base leading-relaxed text-steel">
+                    {c.copy}
+                  </p>
+                  <span className="mt-6 inline-flex items-baseline gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-graphite group-hover:text-signal">
                     Mehr erfahren
                     <span
                       aria-hidden

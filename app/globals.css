@@ -6,10 +6,17 @@
   --color-mute: #a1a1aa;
   --color-gold: #c8a45c;
   --color-line: rgb(245 245 244 / 0.08);
+  --color-showroom: #f4f7f9;
+  --color-showroom-soft: #e7edf2;
+  --color-panel: #ffffff;
+  --color-graphite: #111820;
+  --color-steel: #5d6b78;
+  --color-signal: #c9151b;
+  --color-chrome: #d7e0e7;
 
   --color-hero-teal: #7ec8c8;
   --color-hero-cream: #e8d49a;
-  --color-hero-blush: #d99891;
+  --color-hero-blush: #c9151b;
   --color-hero-sage: #a8c4a2;
   --color-hero-sky: #9bb8d4;
   --color-hero-slate: #8a8d94;

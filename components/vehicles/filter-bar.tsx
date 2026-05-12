@@ -18,7 +18,7 @@ type Props = {
 
 export function FilterBar({ filter, sort, onFilter, onSort, count }: Props) {
   return (
-    <div className="sticky top-[80px] z-30 -mx-6 mb-12 border-y border-line bg-ink/85 px-6 py-4 backdrop-blur-md sm:-mx-12 sm:px-12 lg:-mx-20 lg:px-20">
+    <div className="-mx-6 mb-10 border-y border-chrome bg-panel px-6 py-4 shadow-[0_12px_30px_rgba(17,24,32,0.06)] sm:-mx-12 sm:px-12 lg:-mx-20 lg:px-20">
       <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-x-8 gap-y-3">
         <div className="flex flex-wrap items-center gap-1 sm:gap-2">
           {FILTERS.map((f) => {
@@ -31,8 +31,8 @@ export function FilterBar({ filter, sort, onFilter, onSort, count }: Props) {
                 className={
                   "rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.2em] transition-colors " +
                   (active
-                    ? "border-bone bg-bone text-ink"
-                    : "border-line text-mute hover:border-bone/40 hover:text-bone")
+                    ? "border-graphite bg-graphite text-white"
+                    : "border-chrome bg-showroom text-steel hover:border-signal hover:text-signal")
                 }
               >
                 {f}
@@ -40,18 +40,18 @@ export function FilterBar({ filter, sort, onFilter, onSort, count }: Props) {
             );
           })}
         </div>
-        <div className="flex items-center gap-4 text-[11px] uppercase tracking-[0.2em] text-mute">
+        <div className="flex items-center gap-4 text-[11px] uppercase tracking-[0.2em] text-steel">
           <span aria-live="polite">{count} Fahrzeuge</span>
-          <span className="hidden h-3 w-px bg-line sm:block" />
+          <span className="hidden h-3 w-px bg-chrome sm:block" />
           <label className="flex items-center gap-2">
             <span className="hidden sm:inline">Sortierung</span>
             <select
               value={sort}
               onChange={(e) => onSort(e.target.value as Sort)}
-              className="cursor-pointer bg-transparent text-bone uppercase tracking-[0.2em] focus:outline-none"
+              className="cursor-pointer rounded-[8px] border border-chrome bg-showroom px-3 py-2 text-graphite uppercase tracking-[0.2em] focus:outline-none focus:ring-2 focus:ring-signal/30"
             >
               {SORTS.map((s) => (
-                <option key={s} value={s} className="bg-ink text-bone">
+                <option key={s} value={s} className="bg-panel text-graphite">
                   {s}
                 </option>
               ))}
