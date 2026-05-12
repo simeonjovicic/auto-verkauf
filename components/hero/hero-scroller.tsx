@@ -7,7 +7,6 @@ import { GRADIENT_COLORS } from "./constants";
 import { BackgroundGradient } from "./background-gradient";
 import { CarStage } from "./car-stage";
 import { OverlayText } from "./overlay-text";
-import { SideRail } from "./side-rail";
 
 const CARS = vehicles;
 
@@ -15,7 +14,6 @@ export function HeroScroller() {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const carRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const textRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -64,20 +62,6 @@ export function HeroScroller() {
               }
             }
 
-            for (let idx = 0; idx < CARS.length; idx++) {
-              const el = textRefs.current[idx];
-              if (!el) continue;
-              if (idx === i) {
-                el.style.opacity = `${1 - t}`;
-                el.style.transform = `translateY(${-20 * t}px)`;
-              } else if (idx === i + 1) {
-                el.style.opacity = `${t}`;
-                el.style.transform = `translateY(${20 * (1 - t)}px)`;
-              } else {
-                el.style.opacity = "0";
-              }
-            }
-
             if (bgRef.current) {
               const c1 = GRADIENT_COLORS[CARS[i].gradient];
               const c2 = GRADIENT_COLORS[CARS[Math.min(i + 1, N - 1)].gradient];
@@ -103,19 +87,7 @@ export function HeroScroller() {
       className="relative h-screen w-full overflow-hidden"
     >
       <BackgroundGradient ref={bgRef} />
-      <CarStage
-        cars={CARS}
-        registerRef={(el, i) => {
-          carRefs.current[i] = el;
-        }}
-      />
-      <SideRail />
-      <OverlayText
-        cars={CARS}
-        registerRef={(el, i) => {
-          textRefs.current[i] = el;
-        }}
-      />
+      <OverlayText />
       <a
         href="#philosophie"
         className="sr-only focus:not-sr-only focus:absolute focus:bottom-6 focus:left-1/2 focus:z-30 focus:-translate-x-1/2 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-xs focus:uppercase focus:tracking-[0.2em] focus:text-bone"

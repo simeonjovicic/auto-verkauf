@@ -17,4 +17,4 @@ export const GRADIENT_COLORS: Record<Gradient, string> = {
  *
  * Default `photo` — swap to `cutout` once cutout PNGs land in `public/cars/`.
  */
-export const HERO_MODE: "photo" | "cutout" = "photo";
+export const HERO_MODE: "photo" | "cutout" = "cutout";
