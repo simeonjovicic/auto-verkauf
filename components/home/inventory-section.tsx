@@ -9,8 +9,8 @@ export function InventorySection() {
       className="relative border-t border-line bg-ink"
       aria-labelledby="fahrzeuge-title"
     >
-      <div className="mx-auto max-w-[1440px] px-6 py-24 sm:px-12 lg:px-20 lg:py-32">
-        <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mx-auto max-w-360 px-6 py-24 sm:px-12 lg:px-20 lg:py-32">
+        <div className="mb-16 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="eyebrow">03 · Aktueller Bestand</p>
             <h2

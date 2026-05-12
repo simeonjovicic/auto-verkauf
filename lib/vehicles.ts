@@ -27,10 +27,12 @@ export type Vehicle = {
   gradient: Gradient;
   src: string;
   srcAvif: string;
+  srcHover?: string;
   blurDataURL: string;
   width: number;
   height: number;
   alt: string;
+  highlight?: string;
   specs: VehicleSpecs;
 };
 
@@ -42,18 +44,20 @@ export const vehicles: Vehicle[] = [
     "name": "Ferrari 488",
     "subtitle": "Spider",
     "gradient": "hero-blush",
-    "src": "/cars/ferrari-488-spider.jpg",
-    "srcAvif": "/cars/ferrari-488-spider.avif",
-    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAOAAwDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAgEE/8QAHxAAAgICAgMBAAAAAAAAAAAAAQIDEQAEITEFElGR/8QAFAEBAAAAAAAAAAAAAAAAAAAAAf/EABURAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIRAxEAPwDS2rtEI2u8QRgD3zf5kmDwMEd1LVZrq8C+SaCo3QNXVcYHneZvdqF/BhTH/9k=",
-    "width": 793,
-    "height": 946,
+    "src": "/cars/ferarri-red8.png",
+    "srcAvif": "/cars/ferarri-red8.png",
+    "srcHover": "/cars/ferarri3.png",
+    "blurDataURL": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAACqADAAQAAAABAAAACAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgACAAKAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMACQkJCQkJEAkJEBYQEBAWHhYWFhYeJh4eHh4eJi4mJiYmJiYuLi4uLi4uLjc3Nzc3N0BAQEBASEhISEhISEhISP/bAEMBCwwMEhESHxERH0szKjNLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS//dAAQAAf/aAAwDAQACEQMRAD8AuXepa39pNvZ2yJGrYDkqQRnryc/pWzF5zRK0oi3kDdgnGe9VX71OOgqbeZ0Od0rRR//Z",
+    "width": 1448,
+    "height": 1086,
     "alt": "Ferrari 488 Spider, Seitenansicht",
+    "highlight": "Aus Privatsammlung · Erstbesitz",
     "specs": {
-      "year": null,
-      "mileage": null,
-      "horsepower": null,
-      "transmission": null,
-      "color": null
+      "year": "2018",
+      "mileage": "12.400 km",
+      "horsepower": "670 PS",
+      "transmission": "F1-Doppelkupplung",
+      "color": "Rosso Corsa"
     }
   },
   {
@@ -63,18 +67,20 @@ export const vehicles: Vehicle[] = [
     "name": "Ferrari 488",
     "subtitle": "Pista",
     "gradient": "hero-sage",
-    "src": "/cars/ferrari-488-pista.jpg",
-    "srcAvif": "/cars/ferrari-488-pista.avif",
-    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQAAwDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQAE/8QAIxAAAgEDAwQDAAAAAAAAAAAAAQIDAAQREiEiBRNBUXGx4f/EABUBAQEAAAAAAAAAAAAAAAAAAAED/8QAGREAAgMBAAAAAAAAAAAAAAAAAREAAgMT/9oADAMBAAIRAxEAPwCfqUaT9p0jD+eR+8VqDSkbW8ZHsSflENBdRyvE9q8q52ZTt80jbJOI+YEZJzp1ZxR0s1KHOiYM/9k=",
-    "width": 709,
-    "height": 945,
+    "src": "/cars/nicke5.png",
+    "srcAvif": "/cars/nicke5.png",
+    "srcHover": "/cars/nicke2.png",
+    "blurDataURL": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAACqADAAQAAAABAAAACAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgACAAKAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMACQkJCQkJEAkJEBYQEBAWHhYWFhYeJh4eHh4eJi4mJiYmJiYuLi4uLi4uLjc3Nzc3N0BAQEBASEhISEhISEhISP/bAEMBCwwMEhESHxERH0szKjNLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS//dAAQAAf/aAAwDAQACEQMRAD8A2J9b14SC20u0jjiVsF3wQ49euR+VaaSoUUzrGJCBu29N3fHtmq0X3R9ahb7x+tSl5mznorJH/9k=",
+    "width": 1448,
+    "height": 1086,
     "alt": "Ferrari 488 Pista, Seitenansicht",
+    "highlight": "Limitiert · Werkscarbon-Paket",
     "specs": {
-      "year": null,
-      "mileage": null,
-      "horsepower": null,
-      "transmission": null,
-      "color": null
+      "year": "2019",
+      "mileage": "6.800 km",
+      "horsepower": "720 PS",
+      "transmission": "F1-Doppelkupplung",
+      "color": "Rosso Corsa"
     }
   },
   {
@@ -83,19 +89,21 @@ export const vehicles: Vehicle[] = [
     "brand": "Ferrari",
     "name": "Ferrari 458",
     "subtitle": "Speciale Aperta",
-    "gradient": "hero-blush",
-    "src": "/cars/ferrari-458-speciale-aperta.jpg",
-    "srcAvif": "/cars/ferrari-458-speciale-aperta.avif",
-    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAJAAwDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAwT/xAAfEAACAgEEAwAAAAAAAAAAAAABAgADERIhM0FxcoH/xAAVAQEBAAAAAAAAAAAAAAAAAAABAv/EABcRAQADAAAAAAAAAAAAAAAAAAEAAhH/2gAMAwEAAhEDEQA/AGK1tSSL61KoWbSAcAdbmGrOyIagMaRu4wc/JJZzD2lw78ya0ddYrP/Z",
-    "width": 1261,
-    "height": 946,
+    "gradient": "hero-cream",
+    "src": "/cars/ferarri-gelb6.png",
+    "srcAvif": "/cars/ferarri-gelb6.png",
+    "srcHover": "/cars/ferarri-gelb2.png",
+    "blurDataURL": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAACqADAAQAAAABAAAACAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgACAAKAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMACQkJCQkJEAkJEBYQEBAWHhYWFhYeJh4eHh4eJi4mJiYmJiYuLi4uLi4uLjc3Nzc3N0BAQEBASEhISEhISEhISP/bAEMBCwwMEhESHxERH0szKjNLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS//dAAQAAf/aAAwDAQACEQMRAD8A6Oa6vFnFvb2rYVgrMVBBBPUHcKuCGdhuMSgnnG7pV4/6z8RTz1rFJ3epppbY/9k=",
+    "width": 1448,
+    "height": 1086,
     "alt": "Ferrari 458 Speciale Aperta, Seitenansicht",
+    "highlight": "499 Stück weltweit · Investment",
     "specs": {
-      "year": null,
-      "mileage": null,
-      "horsepower": null,
-      "transmission": null,
-      "color": null
+      "year": "2015",
+      "mileage": "9.200 km",
+      "horsepower": "605 PS",
+      "transmission": "F1-Doppelkupplung",
+      "color": "Giallo Modena"
     }
   },
   {
@@ -105,18 +113,20 @@ export const vehicles: Vehicle[] = [
     "name": "Porsche 718",
     "subtitle": "Spyder 4.0",
     "gradient": "hero-sky",
-    "src": "/cars/porsche-718-spyder-4-0.jpg",
-    "srcAvif": "/cars/porsche-718-spyder-4-0.avif",
-    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAJAAwDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIEBf/EACIQAAEDAwMFAAAAAAAAAAAAAAIAAQMEERIFMTIhQmFxkf/EABUBAQEAAAAAAAAAAAAAAAAAAAID/8QAFxEBAAMAAAAAAAAAAAAAAAAAABESYf/aAAwDAQACEQMRAD8ALauDwFlFEPTuN2u3xLTVIRU8cYRhYWtfPfzssmu5RKkeLelOunL/2Q==",
-    "width": 1261,
-    "height": 946,
+    "src": "/cars/blau3.png",
+    "srcAvif": "/cars/blau3.png",
+    "srcHover": "/cars/blau2.png",
+    "blurDataURL": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAACqADAAQAAAABAAAACAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgACAAKAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMACQkJCQkJEAkJEBYQEBAWHhYWFhYeJh4eHh4eJi4mJiYmJiYuLi4uLi4uLjc3Nzc3N0BAQEBASEhISEhISEhISP/bAEMBCwwMEhESHxERH0szKjNLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS//dAAQAAf/aAAwDAQACEQMRAD8AS7v9ZSc2tnapHGjY3madw98nj8K6eFY3iR5YUDlQWAbgEjms65/1kn1rQT7g+lat+Qkj/9k=",
+    "width": 1448,
+    "height": 1086,
     "alt": "Porsche 718 Spyder 4.0, Seitenansicht",
+    "highlight": "Manueller GT4-Antrieb",
     "specs": {
-      "year": null,
-      "mileage": null,
-      "horsepower": null,
-      "transmission": null,
-      "color": null
+      "year": "2021",
+      "mileage": "11.500 km",
+      "horsepower": "420 PS",
+      "transmission": "6-Gang manuell",
+      "color": "Saphirblau Metallic"
     }
   },
   {
@@ -132,12 +142,13 @@ export const vehicles: Vehicle[] = [
     "width": 1400,
     "height": 887,
     "alt": "Porsche Cayman \"R\" Peridotmetallic, Seitenansicht",
+    "highlight": "Limitierte Sonderserie · Peridot",
     "specs": {
-      "year": null,
-      "mileage": null,
-      "horsepower": null,
-      "transmission": null,
-      "color": null
+      "year": "2012",
+      "mileage": "34.800 km",
+      "horsepower": "330 PS",
+      "transmission": "6-Gang manuell",
+      "color": "Peridot Metallic"
     }
   },
   {
@@ -153,12 +164,13 @@ export const vehicles: Vehicle[] = [
     "width": 1279,
     "height": 945,
     "alt": "Porsche 996 GT3 RS, Seitenansicht",
+    "highlight": "Sammlerzustand · Originalpapiere",
     "specs": {
-      "year": null,
-      "mileage": null,
-      "horsepower": null,
-      "transmission": null,
-      "color": null
+      "year": "2004",
+      "mileage": "48.200 km",
+      "horsepower": "381 PS",
+      "transmission": "6-Gang manuell",
+      "color": "Carrara Weiß"
     }
   },
   {
@@ -167,19 +179,21 @@ export const vehicles: Vehicle[] = [
     "brand": "BMW",
     "name": "BMW Z3",
     "subtitle": "M Coupé S54",
-    "gradient": "hero-cream",
-    "src": "/cars/bmw-z3-m-coupe-s54.jpg",
-    "srcAvif": "/cars/bmw-z3-m-coupe-s54.avif",
-    "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAIAAwDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAEE/8QAHhABAAEEAgMAAAAAAAAAAAAAAQIAAwQhERMiMWH/xAAUAQEAAAAAAAAAAAAAAAAAAAAC/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAExQf/aAAwDAQACEQMRAD8AmXccO91Q8tCKO/fJqtscZlCKkdgg8ifKUoOIWn//2Q==",
-    "width": 1381,
-    "height": 946,
+    "gradient": "hero-slate",
+    "src": "/cars/grau1.png",
+    "srcAvif": "/cars/grau1.png",
+    "srcHover": "/cars/grau2.png",
+    "blurDataURL": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAACqADAAQAAAABAAAACAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgACAAKAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMACQkJCQkJEAkJEBYQEBAWHhYWFhYeJh4eHh4eJi4mJiYmJiYuLi4uLi4uLjc3Nzc3N0BAQEBASEhISEhISEhISP/bAEMBCwwMEhESHxERH0szKjNLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS//dAAQAAf/aAAwDAQACEQMRAD8A6ye/vv8AVWkIRQT85KkEY461ZWeIqDIoDY5weM++4gH+rFVT1NMD/2Q==",
+    "width": 1448,
+    "height": 1086,
     "alt": "BMW Z3 M Coupé S54, Seitenansicht",
+    "highlight": "Kultstatus · S54 Motor",
     "specs": {
-      "year": null,
-      "mileage": null,
-      "horsepower": null,
-      "transmission": null,
-      "color": null
+      "year": "2002",
+      "mileage": "62.500 km",
+      "horsepower": "325 PS",
+      "transmission": "5-Gang manuell",
+      "color": "Titansilber Metallic"
     }
   }
 ];
