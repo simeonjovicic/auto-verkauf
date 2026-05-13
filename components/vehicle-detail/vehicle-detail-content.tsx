@@ -11,8 +11,18 @@ type Props = {
   mode?: DetailMode;
 };
 
+function getOverviewPoints(vehicle: Vehicle) {
+  return [
+    vehicle.highlight,
+    vehicle.category,
+    vehicle.specs.transmission,
+    vehicle.specs.color,
+  ].filter(Boolean) as string[];
+}
+
 export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
   const isDrawer = mode === "drawer";
+  const overviewPoints = getOverviewPoints(vehicle);
 
   return (
     <>
@@ -33,19 +43,57 @@ export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
           }
         >
           <div className={isDrawer ? "xl:col-span-7" : "lg:col-span-7"}>
-            <p className="eyebrow text-mute">Über dieses Fahrzeug</p>
-            <div className="serif mt-6 space-y-6 text-lg leading-relaxed text-bone/85 sm:text-xl">
+            <p className="eyebrow text-mute">Überblick</p>
+            <div className="mt-6 max-w-[760px]">
+              <h2 className="serif text-4xl leading-tight text-bone sm:text-5xl">
+                {vehicle.name} {vehicle.subtitle}: klar dokumentiert, sofort
+                einordbar.
+              </h2>
+            </div>
+            <div className="serif mt-8 space-y-6 text-lg leading-relaxed text-bone/82 sm:text-xl">
               <p>
-                Persönlich verlesen, im Detail dokumentiert, in Wien einsehbar.
-                Jedes Fahrzeug in unserem Bestand erfüllt die gleichen
-                Kriterien: belegbare Historie, technische Integrität und ein
-                Zustand, der den Charakter des Modells erkennen lässt.
+                Dieses Fahrzeug wird nicht nur als Bild verkauft, sondern als
+                vollständiges Paket: Zustand, Historie, Ausstattung und
+                technische Einordnung werden vor einer Besichtigung transparent
+                vorbereitet.
               </p>
               <p>
-                Vollständige Unterlagen, Servicehefte, Originalrechnungen und
-                Vorbesitzerketten stellen wir gerne im Rahmen einer Besichtigung
-                bereit.
+                Sie erhalten vorab die relevanten Eckdaten und vor Ort einen
+                ruhigen, nachvollziehbaren Rundgang am Fahrzeug. Keine
+                Showroom-Hektik, sondern ein klarer Blick auf das Auto und
+                seine Substanz.
               </p>
+            </div>
+
+            {overviewPoints.length > 0 ? (
+              <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {overviewPoints.map((point) => (
+                  <div
+                    key={point}
+                    className="border border-line bg-bone/[0.03] px-5 py-4"
+                  >
+                    <p className="text-sm leading-relaxed text-bone">{point}</p>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+
+            <div className="mt-14 grid grid-cols-1 gap-8 border-y border-line py-10 sm:grid-cols-3">
+              {[
+                ["01", "Historie", "Unterlagen, Serviceeinträge und bekannte Besitzdaten werden strukturiert durchgesehen."],
+                ["02", "Zustand", "Lack, Innenraum, Technik und Verschleissteile werden vor Ort gemeinsam eingeordnet."],
+                ["03", "Entscheidung", "Besichtigung, Probefahrt und nächste Schritte werden ohne Zeitdruck geplant."],
+              ].map(([num, title, copy]) => (
+                <div key={num}>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+                    {num}
+                  </p>
+                  <h3 className="serif mt-4 text-2xl text-bone">{title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-mute">
+                    {copy}
+                  </p>
+                </div>
+              ))}
             </div>
 
             <div className="mt-12">
@@ -55,6 +103,17 @@ export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
 
           <aside className={isDrawer ? "xl:col-span-5" : "lg:col-span-5"}>
             <SpecTable vehicle={vehicle} />
+            <div className="mt-12 border border-line bg-bone/[0.03] p-6">
+              <p className="eyebrow text-mute">Besichtigung</p>
+              <p className="serif mt-4 text-2xl leading-tight text-bone">
+                Vor Ort sehen, hören und sauber einordnen.
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-mute">
+                Wir reservieren ausreichend Zeit für Fahrzeugrundgang,
+                Dokumenteneinsicht und eine klare Einschätzung der nächsten
+                Schritte.
+              </p>
+            </div>
             <div className="mt-12">
               <p className="eyebrow text-mute">Standort</p>
               <p className="mt-4 text-sm leading-relaxed text-bone">

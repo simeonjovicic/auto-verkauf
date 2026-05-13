@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import type { Vehicle, Gradient } from "@/lib/vehicles";
+import { VehicleDetailTransitionLink } from "./vehicle-detail-transition-link";
 
 const ACCENT: Record<Gradient, string> = {
   "hero-teal":  "#7ec8c8",
@@ -38,7 +38,8 @@ export function VehicleCard({ vehicle }: Props) {
   ];
 
   return (
-    <Link
+    <VehicleDetailTransitionLink
+      vehicle={vehicle}
       href={`/fahrzeuge/${vehicle.slug}`}
       className="group relative flex h-full flex-col overflow-hidden bg-ink text-bone shadow-[0_24px_80px_rgba(0,0,0,0.45)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_36px_110px_rgba(0,0,0,0.6)]"
       aria-label={`${vehicle.name} ${vehicle.subtitle} — Details ansehen`}
@@ -117,6 +118,6 @@ export function VehicleCard({ vehicle }: Props) {
           </span>
         </div>
       </div>
-    </Link>
+    </VehicleDetailTransitionLink>
   );
 }
