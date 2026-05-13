@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter_Tight, Fraunces } from "next/font/google";
 import { Header } from "@/components/nav/header";
+import { Footer } from "@/components/footer/footer";
 import "./globals.css";
 
 const interTight = Inter_Tight({
@@ -57,6 +58,7 @@ export default function RootLayout({
       <body className="min-h-full bg-ink text-bone font-sans">
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

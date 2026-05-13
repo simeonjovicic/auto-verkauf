@@ -1,18 +1,46 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/layout/page-hero";
-import { Footer } from "@/components/footer/footer";
 import Link from "next/link";
+import { PageHero } from "@/components/layout/page-hero";
 import { vehicles } from "@/lib/vehicles";
 
 export const metadata: Metadata = {
-  title: "VIPs",
+  title: "Service",
   description:
-    "Diskreter Service für eine ausgewählte Klientel. Meyer Motorsport betreut Sammler, Persönlichkeiten und Unternehmen mit dem gleichen Anspruch.",
+    "Sammlerservice, Konsignation und diskrete Fahrzeugvermittlung — seit über vier Jahrzehnten in Wien.",
 };
 
 const showcase = vehicles.find((v) => v.slug === "ferrari-488-pista") ?? vehicles[0];
 
-export default function VipsPage() {
+type Offering = { t: string; d: string };
+
+const OFFERINGS: Offering[] = [
+  {
+    t: "Konsignation",
+    d: "Wir nehmen pro Quartal maximal sechs Fahrzeuge in Konsignation. Inspektion, Fotografie, Marktrecherche, Inserat — Sie werden erst involviert, wenn ein konkretes Angebot vorliegt.",
+  },
+  {
+    t: "Suche & Vermittlung",
+    d: "Auf Zuruf finden wir Fahrzeuge, die nicht öffentlich angeboten werden — europaweit, mit überprüfter Historie und Werks-Service-Akten.",
+  },
+  {
+    t: "Übernahme & Übergabe",
+    d: "Werkstattprüfung, Transport, Anmeldung, Schlüsselübergabe. Sie sehen das Fahrzeug, wenn es bereit ist — nicht vorher.",
+  },
+  {
+    t: "Garage & Pflege",
+    d: "Klimatisierte Unterstellung in Wien, regelmäßige Bewegung, Reifenwechsel und Batterie-Conditioning. Auf Wunsch ganzjährig.",
+  },
+  {
+    t: "Verkauf in Ihrem Namen",
+    d: "Diskrete Vermittlung Ihrer Fahrzeuge. Keine öffentlichen Listings, keine Spekulanten — Käufer kommen aus einem geprüften Netzwerk.",
+  },
+  {
+    t: "Beratung & Inspektion",
+    d: "Pre-Purchase-Inspection vor jedem Sammlerkauf. Wir prüfen Fahrzeuge auch außerhalb unseres Bestandes — auf Stundenbasis, neutral und ohne Provisionsinteresse.",
+  },
+];
+
+export default function ServicePage() {
   return (
     <>
       <PageHero
@@ -21,6 +49,7 @@ export default function VipsPage() {
         lede="Seit vier Jahrzehnten betreuen wir Sammler, Persönlichkeiten und Unternehmen mit dem gleichen Anspruch — Vertraulichkeit und kompromisslose Sorgfalt vom ersten Gespräch an."
       />
 
+      {/* Immersive image band */}
       <section className="relative bg-ink">
         <div className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">
           <picture>
@@ -47,33 +76,22 @@ export default function VipsPage() {
         </div>
       </section>
 
+      {/* Offerings */}
       <section className="bg-ink px-6 py-20 sm:px-12 sm:py-24 lg:px-20">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-x-16 gap-y-16 lg:grid-cols-12">
+        <div className="mx-auto grid max-w-360 grid-cols-1 gap-x-16 gap-y-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <p className="eyebrow text-mute">Was Sie erwartet</p>
-            <h2 className="serif mt-3 text-balance text-4xl text-bone sm:text-5xl">
-              Ein einziger Ansprechpartner. Für alles.
+            <p className="eyebrow text-gold!">Was Sie erwartet</p>
+            <h2 className="serif mt-6 text-balance text-4xl text-bone sm:text-5xl">
+              Ein einziger Ansprechpartner. <span className="italic text-bone/55">Für alles.</span>
             </h2>
+            <p className="mt-6 max-w-[42ch] text-base leading-relaxed text-mute sm:text-lg">
+              Wir machen keine Massenabwicklung. Unsere Klientel kommt zu uns,
+              weil sie genau weiß, dass jedes Fahrzeug einzeln betreut wird —
+              vom ersten Telefonat bis zur Übergabe und darüber hinaus.
+            </p>
           </div>
           <div className="grid grid-cols-1 gap-x-12 gap-y-12 sm:grid-cols-2 lg:col-span-7">
-            {[
-              {
-                t: "Suche & Vermittlung",
-                d: "Auf Zuruf finden wir Fahrzeuge, die nicht öffentlich angeboten werden — europaweit, mit überprüfter Historie.",
-              },
-              {
-                t: "Übernahme & Übergabe",
-                d: "Inspektion, Transport, Anmeldung. Sie sehen das Fahrzeug, wenn es bereit ist.",
-              },
-              {
-                t: "Garage & Pflege",
-                d: "Klimatisierte Unterstellung, regelmässige Bewegung, Werterhalt — auf Wunsch ganzjährig.",
-              },
-              {
-                t: "Verkauf in Ihrem Namen",
-                d: "Diskrete Vermittlung Ihrer Fahrzeuge. Keine öffentlichen Listings, keine Spekulanten.",
-              },
-            ].map((l) => (
+            {OFFERINGS.map((l) => (
               <div key={l.t}>
                 <h3 className="serif text-2xl text-bone">{l.t}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-mute">{l.d}</p>
@@ -83,11 +101,12 @@ export default function VipsPage() {
         </div>
       </section>
 
+      {/* CTA */}
       <section className="border-t border-line bg-ink px-6 py-20 sm:px-12 sm:py-24 lg:px-20">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-12">
+        <div className="mx-auto grid max-w-360 grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="eyebrow text-mute">Erstkontakt</p>
-            <h2 className="serif mt-3 text-balance text-4xl text-bone sm:text-5xl">
+            <p className="eyebrow text-gold!">Erstkontakt</p>
+            <h2 className="serif mt-6 text-balance text-4xl text-bone sm:text-5xl">
               Sprechen Sie direkt mit dem Inhaber.
             </h2>
             <p className="mt-6 max-w-[52ch] text-base leading-relaxed text-mute sm:text-lg">
@@ -105,8 +124,6 @@ export default function VipsPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }

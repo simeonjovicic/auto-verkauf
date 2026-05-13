@@ -72,7 +72,7 @@ export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
         </div>
 
         {!isDrawer ? (
-          <div className="mx-auto mt-16 max-w-[1440px] border-t border-line pt-8">
+          <div className="mx-auto mt-24 max-w-[1440px] border-t border-line pt-8">
             <Link
               href="/fahrzeuge/"
               className="text-[11px] uppercase tracking-[0.2em] text-mute hover:text-bone"

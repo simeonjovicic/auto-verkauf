@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { PageHero } from "@/components/layout/page-hero";
-import { Footer } from "@/components/footer/footer";
 import { ContactForm } from "@/components/contact/contact-form";
 import { SITE } from "@/lib/site";
 
@@ -111,8 +110,6 @@ export default function KontaktPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/page-hero";
-import { Footer } from "@/components/footer/footer";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -118,8 +117,6 @@ export default function ImpressumPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }

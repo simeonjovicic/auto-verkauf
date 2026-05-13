@@ -6,13 +6,11 @@
   --color-mute: #a1a1aa;
   --color-gold: #c8a45c;
   --color-line: rgb(245 245 244 / 0.08);
-  --color-showroom: #f4f7f9;
-  --color-showroom-soft: #e7edf2;
-  --color-panel: #ffffff;
-  --color-graphite: #111820;
-  --color-steel: #5d6b78;
-  --color-signal: #c9151b;
-  --color-chrome: #d7e0e7;
+
+  /* Stage = light backdrop used inside the vehicle card image area only.
+     This is the one piece of "light" colour that survives the dark flip. */
+  --color-stage: #e7edf2;
+  --color-stage-soft: #f4f7f9;
 
   --color-hero-teal: #7ec8c8;
   --color-hero-cream: #e8d49a;
@@ -23,6 +21,12 @@
 
   --font-sans: var(--font-sans), system-ui, sans-serif;
   --font-serif: var(--font-serif), Georgia, serif;
+
+  --animate-marquee: marquee 40s linear infinite;
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 }
 
 :root {

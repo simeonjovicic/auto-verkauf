@@ -102,7 +102,7 @@ export function AnimatedStats() {
   return (
     <div
       ref={rootRef}
-      className="mt-12 grid grid-cols-1 border-y border-chrome sm:grid-cols-2"
+      className="mt-12 grid grid-cols-1 border-y border-line sm:grid-cols-2"
     >
       {STATS.map((stat, index) => (
         <StatItem key={stat.label} stat={stat} index={index} active={active} />
@@ -128,7 +128,7 @@ function StatItem({
   return (
     <div
       className={
-        "group relative flex min-h-[150px] gap-5 border-chrome py-6 transition duration-700 sm:px-5 " +
+        "group relative flex min-h-[150px] gap-5 border-line py-6 transition duration-700 sm:px-5 " +
         mobileDivider +
         columnDivider +
         rowDivider +
@@ -140,28 +140,28 @@ function StatItem({
         <Icon
           aria-hidden
           strokeWidth={1.35}
-          className="h-10 w-10 text-signal transition-transform duration-500 group-hover:-translate-y-1"
+          className="h-10 w-10 text-gold transition-transform duration-500 group-hover:-translate-y-1"
         />
       </div>
 
       <div className="min-w-0">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-steel">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-mute">
           {stat.label}
         </p>
         <div className="mt-4">
           {stat.type === "count" ? (
             <CountValue stat={stat} active={active} />
           ) : stat.type === "brands" ? (
-            <p className="serif text-3xl leading-tight text-graphite sm:text-4xl">
+            <p className="serif text-3xl leading-tight text-bone sm:text-4xl">
               {stat.brands.join(" / ")}
             </p>
           ) : (
-            <p className="serif text-5xl leading-none tracking-normal text-graphite">
+            <p className="serif text-5xl leading-none tracking-normal text-bone">
               {stat.value}
             </p>
           )}
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-steel">{stat.detail}</p>
+        <p className="mt-3 text-sm leading-relaxed text-mute">{stat.detail}</p>
       </div>
     </div>
   );
@@ -202,7 +202,7 @@ function CountValue({
   }, [active, stat.end]);
 
   return (
-    <p className="serif text-5xl leading-none tracking-normal text-graphite sm:text-6xl">
+    <p className="serif text-5xl leading-none tracking-normal text-bone sm:text-6xl">
       <span className="text-[0.42em] align-middle">{stat.prefix}</span>
       {value}
       <span className="text-[0.48em] align-top">{stat.suffix}</span>

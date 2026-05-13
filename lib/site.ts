@@ -16,9 +16,9 @@ export const SITE = {
 } as const;
 
 export const NAV_LINKS = [
-  { href: "/fahrzeuge", label: "Fahrzeuge" },
-  { href: "/unternehmen", label: "Unternehmen" },
-  { href: "/vips", label: "VIPs" },
-  { href: "/stunts", label: "Stunts" },
+  { href: "/fahrzeuge", label: "Stock" },
+  { href: "/marken", label: "Marken" },
+  { href: "/service", label: "Service" },
+  { href: "/insights", label: "Insights" },
   { href: "/kontakt", label: "Kontakt" },
 ] as const;

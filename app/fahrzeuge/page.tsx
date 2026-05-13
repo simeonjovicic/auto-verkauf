@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/page-hero";
 import { VehicleGrid } from "@/components/vehicles/vehicle-grid";
-import { Footer } from "@/components/footer/footer";
 import { vehicles } from "@/lib/vehicles";
 
 export const metadata: Metadata = {
-  title: "Fahrzeuge",
+  title: "Stock",
   description:
     "Aktueller Bestand bei Meyer Motorsport in Wien — handverlesene Ferrari, Porsche und BMW M Sammlerstücke.",
 };
@@ -14,17 +13,15 @@ export default function FahrzeugePage() {
   return (
     <>
       <PageHero
-        eyebrow="Bestand"
+        eyebrow="Stock"
         title="Fahrzeuge im Überblick."
-        lede={`Aktuell ${vehicles.length} geprüfte Fahrzeuge in Wien. Helle Übersicht, klare Daten und direkte Anfrage für Besichtigung oder Probefahrt.`}
-        tone="light"
+        lede={`Aktuell ${vehicles.length} geprüfte Fahrzeuge in Wien. Klare Daten, präzise Filter und direkte Anfrage für Besichtigung oder Probefahrt.`}
       />
-      <section className="bg-panel px-6 py-14 text-graphite sm:px-12 sm:py-[72px] lg:px-20">
-        <div className="mx-auto max-w-[1440px]">
+      <section className="bg-ink px-6 py-14 text-bone sm:px-12 sm:py-18 lg:px-20">
+        <div className="mx-auto max-w-360">
           <VehicleGrid />
         </div>
       </section>
-      <Footer />
     </>
   );
 }

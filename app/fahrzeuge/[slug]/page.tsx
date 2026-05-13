@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { getVehicle, getVehicleSlugs } from "@/lib/vehicles";
 import { VehicleDetailContent } from "@/components/vehicle-detail/vehicle-detail-content";
 import { SimilarVehicles } from "@/components/vehicle-detail/similar-vehicles";
-import { Footer } from "@/components/footer/footer";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE } from "@/lib/site";
 
@@ -78,7 +77,6 @@ export default async function VehicleDetailPage({
       <JsonLd data={vehicleLd} />
       <VehicleDetailContent vehicle={vehicle} />
       <SimilarVehicles current={vehicle} />
-      <Footer />
     </>
   );
 }

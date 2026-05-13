@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/page-hero";
-import { Footer } from "@/components/footer/footer";
 import { ParallaxImage } from "@/components/home/parallax-image";
 import { vehicles } from "@/lib/vehicles";
 
@@ -116,8 +115,6 @@ export default function UnternehmenPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }

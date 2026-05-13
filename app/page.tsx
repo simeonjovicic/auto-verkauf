@@ -1,9 +1,9 @@
 import { HeroScroller } from "@/components/hero/hero-scroller";
 import { Philosophy } from "@/components/home/philosophy";
+import { BrandMarquee } from "@/components/home/brand-marquee";
 import { InventorySection } from "@/components/home/inventory-section";
 import { VipsStuntsTeaser } from "@/components/home/vips-stunts-teaser";
 import { ContactInline } from "@/components/home/contact-inline";
-import { Footer } from "@/components/footer/footer";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE } from "@/lib/site";
 
@@ -35,10 +35,10 @@ export default function Home() {
       <JsonLd data={autoDealer} />
       <HeroScroller />
       <Philosophy />
+      <BrandMarquee />
       <InventorySection />
       <VipsStuntsTeaser />
       <ContactInline />
-      <Footer />
     </>
   );
 }

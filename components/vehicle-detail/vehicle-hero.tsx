@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { Vehicle } from "@/lib/vehicles";
 import { GRADIENT_COLORS } from "@/components/hero/constants";
 
@@ -8,6 +11,12 @@ type Props = {
 
 export function VehicleHero({ vehicle, mode = "page" }: Props) {
   const isDrawer = mode === "drawer";
+  const [activeImage, setActiveImage] = useState(vehicle.src);
+
+  // If there's a gallery, use it. Otherwise, fallback to just the main src.
+  const galleryImages = vehicle.gallery && vehicle.gallery.length > 0 
+    ? vehicle.gallery 
+    : [vehicle.src];
 
   return (
     <section
@@ -41,28 +50,65 @@ export function VehicleHero({ vehicle, mode = "page" }: Props) {
           </p>
         </div>
         <div className={isDrawer ? "lg:col-span-7" : "lg:col-span-7"}>
+          
+          {/* Main active image */}
           <picture>
-            <source srcSet={vehicle.srcAvif} type="image/avif" />
+            {/* We only use srcAvif if the active image is the default one, otherwise we don't have AVIF versions mapped out yet. For simplicity, we just use the raw imgSrc for the active view to ensure it updates properly. */}
+            {activeImage === vehicle.src && (
+              <source srcSet={vehicle.srcAvif} type="image/avif" />
+            )}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={vehicle.src}
-              alt={vehicle.alt}
+              key={activeImage} // Force re-render for smooth swap (or just let react update src)
+              src={activeImage}
+              alt={`${vehicle.name} ${vehicle.subtitle}`}
               width={vehicle.width}
               height={vehicle.height}
               decoding="async"
               loading={isDrawer ? "eager" : "lazy"}
               draggable={false}
               className={
-                "h-auto w-full select-none drop-shadow-[0_40px_60px_rgba(0,0,0,0.5)] " +
+                "h-auto w-full select-none drop-shadow-[0_40px_60px_rgba(0,0,0,0.5)] transition-opacity duration-300 animate-in fade-in " +
                 (isDrawer ? "max-h-[420px] object-contain" : "")
               }
               style={{
-                backgroundImage: `url(${vehicle.blurDataURL})`,
+                backgroundImage: activeImage === vehicle.src ? `url(${vehicle.blurDataURL})` : undefined,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             />
           </picture>
+
+          {/* Interactive Thumbnails */}
+          {galleryImages.length > 1 && (
+            <div className="mt-6 flex flex-wrap gap-2">
+              {galleryImages.map((imgSrc, idx) => {
+                const isActive = activeImage === imgSrc;
+                return (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setActiveImage(imgSrc)}
+                    className={`relative overflow-hidden rounded-md border transition-all duration-200 ${
+                      isActive 
+                        ? "border-gold opacity-100 shadow-[0_0_15px_rgba(255,215,0,0.2)]" 
+                        : "border-line opacity-60 hover:border-bone/50 hover:opacity-100"
+                    }`}
+                    style={{ width: "120px", height: "90px" }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img 
+                      src={imgSrc} 
+                      alt={`Thumbnail ${idx + 1}`} 
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
         </div>
       </div>
     </section>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/page-hero";
-import { Footer } from "@/components/footer/footer";
 import Link from "next/link";
 import { vehicles } from "@/lib/vehicles";
 
@@ -141,8 +140,6 @@ export default function StuntsPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }
