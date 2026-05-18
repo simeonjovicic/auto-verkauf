@@ -5,8 +5,6 @@ import { vehicles, type Vehicle, type Brand } from "@/lib/vehicles";
 import { VehicleCard } from "./vehicle-card";
 import type { Sort } from "./filter-bar";
 
-const ALL_BRANDS: Brand[] = ["Hyundai", "Mitsubishi", "Gebrauchtwagen"];
-
 const SORT_OPTIONS: { value: Sort; label: string }[] = [
   { value: "newest",     label: "Neu zuerst" },
   { value: "price-asc",  label: "Preis ↑" },
@@ -49,6 +47,11 @@ export function VehicleGrid({ initial }: { initial?: Vehicle[] } = {}) {
   const [activeBrands, setActiveBrands] = useState<Brand[]>([]);
   const [sort, setSort] = useState<Sort>("newest");
 
+  const allBrands = useMemo(
+    () => Array.from(new Set(source.map((vehicle) => vehicle.brand))),
+    [source],
+  );
+
   const toggleBrand = useCallback((b: Brand) => {
     setActiveBrands((prev) =>
       prev.includes(b) ? prev.filter((x) => x !== b) : [...prev, b],
@@ -65,25 +68,22 @@ export function VehicleGrid({ initial }: { initial?: Vehicle[] } = {}) {
 
   return (
     <>
-      {/* Filter strip */}
       <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-        
-        {/* Left: Brand Filter (Segmented Control Style) */}
         <div className="flex items-center gap-4">
-          <div className="inline-flex rounded-full border border-line bg-ink/50 p-1 backdrop-blur-md">
+          <div className="inline-flex flex-wrap border border-fischer-line bg-surface-soft p-1">
             <button
               type="button"
               onClick={() => setActiveBrands([])}
               className={
-                "rounded-full px-5 py-2 text-[11px] font-medium uppercase tracking-[0.2em] transition-all duration-300 " +
+                "px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors sm:px-5 " +
                 (activeBrands.length === 0
-                  ? "bg-bone text-ink shadow-md"
-                  : "text-bone/60")
+                  ? "bg-hyundai text-paper"
+                  : "text-anthracite/60 hover:text-anthracite")
               }
             >
               Alle Marken
             </button>
-            {ALL_BRANDS.map((b) => {
+            {allBrands.map((b) => {
               const active = activeBrands.includes(b);
               return (
                 <button
@@ -91,10 +91,10 @@ export function VehicleGrid({ initial }: { initial?: Vehicle[] } = {}) {
                   type="button"
                   onClick={() => toggleBrand(b)}
                   className={
-                    "rounded-full px-5 py-2 text-[11px] font-medium uppercase tracking-[0.2em] transition-all duration-300 " +
+                    "px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors sm:px-5 " +
                     (active
-                      ? "bg-gold text-ink shadow-md"
-                      : "text-bone/60")
+                      ? "bg-copper text-paper"
+                      : "text-anthracite/60 hover:text-anthracite")
                   }
                 >
                   {b}
@@ -104,26 +104,23 @@ export function VehicleGrid({ initial }: { initial?: Vehicle[] } = {}) {
           </div>
         </div>
 
-        {/* Right: Sort & Count */}
         <div className="flex items-center gap-6 text-[11px] uppercase tracking-[0.2em]">
-          
-          {/* Sort Dropdown */}
           <div className="relative flex items-center gap-3">
-            <span className="text-mute">Sortierung:</span>
+            <span className="text-fischer-mute">Sortierung:</span>
             <div className="relative">
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as Sort)}
-                className="appearance-none cursor-pointer bg-transparent pr-6 text-bone focus:outline-none"
+                className="cursor-pointer appearance-none bg-transparent pr-6 text-anthracite focus:outline-none"
               >
                 {SORT_OPTIONS.map((o) => (
-                  <option key={o.value} value={o.value} className="bg-ink text-bone">
+                  <option key={o.value} value={o.value} className="bg-paper text-anthracite">
                     {o.label}
                   </option>
                 ))}
               </select>
               <svg
-                className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 h-3 w-3 text-bone/60"
+                className="pointer-events-none absolute right-0 top-1/2 h-3 w-3 -translate-y-1/2 text-anthracite/60"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -133,18 +130,15 @@ export function VehicleGrid({ initial }: { initial?: Vehicle[] } = {}) {
             </div>
           </div>
 
-          {/* Divider */}
-          <span aria-hidden className="hidden h-3 w-px bg-line sm:block" />
+          <span aria-hidden className="hidden h-3 w-px bg-fischer-line sm:block" />
 
-          {/* Count */}
-          <span className="text-mute">
-            <span className="text-bone">{filtered.length}</span>{" "}
+          <span className="text-fischer-mute">
+            <span className="text-anthracite">{filtered.length}</span>{" "}
             {filtered.length === 1 ? "Fahrzeug" : "Fahrzeuge"}
           </span>
         </div>
       </div>
 
-      {/* Vehicle grid */}
       {filtered.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-7">
           {filtered.map((v) => (
@@ -154,18 +148,18 @@ export function VehicleGrid({ initial }: { initial?: Vehicle[] } = {}) {
           ))}
         </div>
       ) : (
-        <div className="border border-line bg-ink px-8 py-16 text-center">
-          <p className="serif text-2xl text-bone">
+        <div className="border border-fischer-line bg-surface-soft px-8 py-16 text-center">
+          <p className="text-2xl font-semibold text-anthracite">
             Keine Fahrzeuge entsprechen Ihrer Auswahl.
           </p>
-          <p className="mt-3 text-sm text-mute">
-            Setzen Sie die Filter zurück oder sprechen Sie uns direkt an —
+          <p className="mt-3 text-sm text-fischer-mute">
+            Setzen Sie die Filter zurück oder sprechen Sie uns direkt an -
             die Angebote ändern sich laufend.
           </p>
           <button
             type="button"
             onClick={() => setActiveBrands([])}
-            className="mt-6 inline-flex items-center gap-3 border border-bone/70 px-5 py-3 text-[11px] uppercase tracking-[0.22em] text-bone transition-colors hover:border-bone hover:bg-bone hover:text-ink"
+            className="mt-6 inline-flex items-center gap-3 border border-anthracite/20 px-5 py-3 text-[11px] uppercase tracking-[0.22em] text-anthracite transition-colors hover:border-hyundai hover:text-hyundai"
           >
             Filter zurücksetzen
             <span aria-hidden>→</span>

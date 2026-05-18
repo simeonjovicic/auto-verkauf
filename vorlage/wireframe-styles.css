@@ -1,0 +1,332 @@
+/* Wireframe shared aesthetic for Autohaus Fischer */
+
+:root {
+  --paper: #f4f1ea;
+  --paper-2: #ebe7dc;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-light: #8a857a;
+  --rule: #1a1a1a;
+  --accent: #b54a2c;   /* muted terra — adjustable via tweaks */
+  --hand: #2c4f6f;     /* annotation ink */
+  --note-bg: #fff9c4;
+  --shadow: 0 1px 0 rgba(0,0,0,.04);
+
+  --font-serif: 'Instrument Serif', 'Newsreader', Georgia, serif;
+  --font-sans: 'Geist', 'Inter Tight', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-hand: 'Caveat', 'Kalam', cursive;
+}
+
+/* Each wireframe artboard */
+.wf {
+  width: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  position: relative;
+}
+
+.wf * { box-sizing: border-box; }
+
+/* ---------- Generic wireframe primitives ---------- */
+
+.wf .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 48px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+.wf .nav .brand {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-style: italic;
+}
+.wf .nav ul {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.wf .nav .cta {
+  border: 1.5px solid var(--ink);
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.wf .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.wf .section {
+  padding: 72px 0;
+  border-bottom: 1px dashed var(--ink-light);
+}
+.wf .section:last-child { border-bottom: none; }
+
+.wf .section-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wf .section-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.wf h1, .wf h2, .wf h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Image / photo placeholder */
+.wf .ph {
+  background: var(--paper-2);
+  border: 1px solid var(--ink);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  overflow: hidden;
+}
+.wf .ph::before,
+.wf .ph::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top right, transparent calc(50% - 0.5px), var(--ink-light) 50%, transparent calc(50% + 0.5px));
+  opacity: .35;
+}
+.wf .ph::after {
+  background:
+    linear-gradient(to top left, transparent calc(50% - 0.5px), var(--ink-light) 50%, transparent calc(50% + 0.5px));
+}
+.wf .ph > span {
+  position: relative;
+  z-index: 1;
+  background: var(--paper-2);
+  padding: 4px 8px;
+}
+
+/* line placeholders for body copy */
+.wf .lines { display: flex; flex-direction: column; gap: 8px; }
+.wf .lines > i {
+  display: block;
+  height: 8px;
+  background: var(--ink);
+  opacity: .12;
+  border-radius: 2px;
+}
+.wf .lines > i:nth-child(3n) { width: 88%; }
+.wf .lines > i:nth-child(3n+1) { width: 96%; }
+.wf .lines > i:nth-child(3n+2) { width: 78%; }
+.wf .lines > i:last-child { width: 40%; }
+
+/* Annotation (handwritten note) */
+.wf .anno {
+  font-family: var(--font-hand);
+  color: var(--hand);
+  font-size: 19px;
+  line-height: 1.15;
+  letter-spacing: 0.005em;
+}
+.wf .anno-arrow {
+  position: absolute;
+  font-family: var(--font-hand);
+  color: var(--hand);
+  font-size: 18px;
+  line-height: 1.1;
+  pointer-events: none;
+  z-index: 5;
+}
+.wf .anno-arrow svg { display: block; }
+
+/* Sticky note (post-it style) */
+.wf .note {
+  background: var(--note-bg);
+  font-family: var(--font-hand);
+  color: #4a3a10;
+  padding: 14px 16px 16px;
+  font-size: 17px;
+  line-height: 1.2;
+  box-shadow: 2px 4px 0 rgba(0,0,0,.08);
+  transform: rotate(-1.2deg);
+  display: inline-block;
+}
+
+/* Tag / chip */
+.wf .chip {
+  border: 1px solid var(--ink);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--paper);
+}
+.wf .chip.solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+.wf .chip.accent {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* button-ish */
+.wf .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid var(--ink);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-family: var(--font-sans);
+  background: transparent;
+}
+.wf .btn.solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+.wf .btn.accent {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* footer */
+.wf .foot {
+  padding: 40px 48px 36px;
+  border-top: 1px solid var(--ink);
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.wf .foot h4 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 12px;
+  font-weight: 500;
+}
+.wf .foot ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+
+/* Vehicle card */
+.wf .car {
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.wf .car .ph { border: none; border-bottom: 1px solid var(--ink); aspect-ratio: 4 / 3; }
+.wf .car .meta {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.wf .car .meta .name { font-family: var(--font-serif); font-size: 18px; }
+.wf .car .meta .spec { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.06em; }
+.wf .car .meta .price { font-family: var(--font-serif); font-size: 16px; margin-top: 4px; }
+
+/* Team member */
+.wf .person {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.wf .person .ph { aspect-ratio: 3 / 4; }
+.wf .person .name { font-family: var(--font-serif); font-size: 16px; line-height: 1.2; }
+.wf .person .role { font-family: var(--font-mono); font-size: 10px; color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* utility */
+.wf .grid { display: grid; }
+.wf .row { display: flex; }
+.wf .gap-4 { gap: 4px; } .wf .gap-8 { gap: 8px; } .wf .gap-12 { gap: 12px; }
+.wf .gap-16 { gap: 16px; } .wf .gap-24 { gap: 24px; } .wf .gap-32 { gap: 32px; } .wf .gap-48 { gap: 48px; }
+.wf .col { display: flex; flex-direction: column; }
+.wf .between { justify-content: space-between; }
+.wf .center { align-items: center; }
+.wf .baseline { align-items: baseline; }
+.wf .relative { position: relative; }
+.wf .mt-8 { margin-top: 8px; } .wf .mt-16 { margin-top: 16px; }
+.wf .mt-24 { margin-top: 24px; } .wf .mt-32 { margin-top: 32px; } .wf .mt-48 { margin-top: 48px; }
+.wf .mb-16 { margin-bottom: 16px; } .wf .mb-24 { margin-bottom: 24px; }
+
+/* serif huge headline */
+.wf .display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+/* monospace small caps eyebrow */
+.wf .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* underline-on-hover style nav links */
+.wf .ulink {
+  position: relative;
+  cursor: default;
+}
+.wf .ulink::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0;
+}
+
+/* Diagonal divider — wobbly hand-drawn rule */
+.wf .scribble {
+  height: 14px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'><path d='M0 8 C 20 2 40 13 60 7 S 100 1 120 8 S 160 13 200 6' fill='none' stroke='%231a1a1a' stroke-width='1.2' stroke-linecap='round'/></svg>");
+  background-repeat: repeat-x;
+  background-size: 200px 14px;
+}
+
+/* highlighter swipe behind text */
+.wf .hl {
+  background: linear-gradient(to top, var(--accent) 0%, var(--accent) 35%, transparent 35%);
+  padding: 0 4px;
+}

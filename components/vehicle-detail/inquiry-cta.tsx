@@ -8,27 +8,27 @@ export function InquiryCta({ vehicle }: { vehicle: Vehicle }) {
   const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   return (
-    <div className="border-y border-line py-10">
-      <p className="eyebrow text-mute">Interesse</p>
-      <p className="serif mt-4 text-3xl leading-tight text-bone">
+    <div className="border-y border-fischer-line py-10">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-hyundai">Interesse</p>
+      <p className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-anthracite">
         Beratung, Probefahrt oder Angebot direkt anfragen.
       </p>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
         <Link
           href={`/kontakt/?fahrzeug=${vehicle.slug}`}
-          className="inline-flex items-center justify-center bg-bone px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold hover:text-ink"
+          className="inline-flex items-center justify-center bg-hyundai px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-paper transition-colors hover:bg-hyundai-deep"
         >
-          Anfrage senden →
+          Anfrage senden
         </Link>
         <a
           href={mailto}
-          className="inline-flex items-center justify-center border border-line px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-bone transition-colors hover:border-bone"
+          className="inline-flex items-center justify-center border border-fischer-line px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-anthracite transition-colors hover:border-hyundai hover:text-hyundai"
         >
           E-Mail direkt
         </a>
         <a
           href={`tel:${SITE.phone.replace(/\s/g, "")}`}
-          className="inline-flex items-center justify-center border border-line px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-bone transition-colors hover:border-bone"
+          className="inline-flex items-center justify-center border border-fischer-line px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-anthracite transition-colors hover:border-hyundai hover:text-hyundai"
         >
           {SITE.phoneDisplay}
         </a>

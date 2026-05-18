@@ -10,13 +10,15 @@ type Props = {
 
 function getHeroStats(vehicle: Vehicle) {
   return [
-    { label: "Baujahr", value: vehicle.specs.year ?? "Auf Anfrage", animated: false },
     {
-      label: "Antrieb",
+      label: "Erstzulassung",
+      value: vehicle.specs.year ?? "Auf Anfrage",
+      animated: false,
+    },
+    {
+      label: "Leistung",
       value: vehicle.specs.horsepower ?? "Auf Anfrage",
-      target: vehicle.horsepowerPs,
-      suffix: "PS",
-      animated: true,
+      animated: false,
     },
     {
       label: "Kilometer",
@@ -182,8 +184,7 @@ export function VehicleHero({ vehicle, mode = "page" }: Props) {
   return (
     <section
       className={
-        "relative isolate flex overflow-hidden border-b border-line bg-black text-bone " +
-        (isDrawer ? "min-h-[720px] flex-col" : "min-h-screen flex-col")
+        "relative isolate overflow-hidden border-b border-fischer-line bg-surface text-anthracite"
       }
     >
       <div
@@ -191,120 +192,135 @@ export function VehicleHero({ vehicle, mode = "page" }: Props) {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 78% 66% at 44% 42%, rgba(255,255,255,0.075), transparent 62%)",
+            "linear-gradient(135deg, rgba(255,255,255,0.76), rgba(245,244,241,0.72))",
         }}
       />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-56 bg-[linear-gradient(to_top,rgba(0,0,0,0.95),transparent)]" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1520px] flex-1 flex-col px-6 pt-28 sm:px-12 sm:pt-32 lg:px-20">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <p className="eyebrow text-bone/55">{vehicle.brand}</p>
-            <h1 className="serif mt-4 max-w-[12ch] text-4xl leading-[1.02] text-bone sm:text-5xl lg:text-6xl">
-              {vehicle.name}{" "}
-              <span className="italic text-bone/62">{vehicle.subtitle}</span>
+      <div
+        className={
+          "relative z-10 mx-auto w-full max-w-[1440px] px-6 sm:px-12 lg:px-20 " +
+          (isDrawer ? "py-14 sm:py-16" : "pb-16 pt-24 sm:pt-28 lg:pb-20")
+        }
+      >
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] lg:items-end lg:gap-14">
+          <div className="max-w-2xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-hyundai">
+              {vehicle.brand}
+            </p>
+            <h1 className="mt-4 text-4xl font-semibold leading-[1.02] tracking-tight text-anthracite sm:text-5xl xl:text-6xl">
+              {vehicle.name}
+              <span className="block text-copper">{vehicle.subtitle}</span>
             </h1>
-          </div>
-          <div className="text-left sm:pt-[3.25rem] sm:text-right">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-bone/45">
-              Preis
-            </p>
-            <p className="mt-2 text-xl text-bone sm:text-2xl">
-              {vehicle.price || "Auf Anfrage"}
-            </p>
-          </div>
-        </div>
+            {vehicle.highlight ? (
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-fischer-mute sm:text-lg">
+                {vehicle.highlight}
+              </p>
+            ) : null}
 
-        <div className="relative mt-8 flex flex-1 items-end justify-center pb-4 sm:mt-4 sm:pb-8 lg:-mt-10">
-          <div
-            aria-hidden
-            className="absolute left-[29%] top-[23%] z-0 w-full -translate-x-1/2 overflow-hidden text-center sm:top-[25%] lg:top-[27%]"
-          >
-            <span className="inline-block max-w-full truncate text-[2.97rem] font-black uppercase leading-none tracking-[0.04em] text-white/13 sm:text-[4.22rem] lg:text-[95px] xl:text-[117px]">
-              {vehicle.brand.toUpperCase()}
-            </span>
-          </div>
+            <div className="mt-8 inline-flex flex-col border border-fischer-line bg-paper/70 px-5 py-4 shadow-[0_18px_55px_rgba(0,44,95,0.08)] lg:hidden">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-anthracite/45">
+                Preis
+              </span>
+              <span className="mt-2 text-2xl font-semibold text-anthracite">
+                {vehicle.price || "Auf Anfrage"}
+              </span>
+            </div>
 
-          <div className="relative z-10 w-[min(92vw,1040px)] max-w-none">
-            <div
-              aria-hidden
-              className="absolute inset-x-[3%] bottom-[-4%] h-12 rounded-full bg-white/22 blur-2xl sm:h-14"
-            />
-            <div
-              ref={sliderRef}
-              onScroll={handleSliderScroll}
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={handlePointerEnd}
-              onPointerCancel={handlePointerEnd}
-              className={
-                "relative z-10 flex overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden " +
-                (isDragging
-                  ? "snap-none cursor-grabbing"
-                  : "snap-x snap-mandatory cursor-grab")
-              }
-            >
-              {productImages.map((image, index) => (
+            <dl className="mt-9 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+              {stats.map((stat) => (
                 <div
-                  key={image.src}
-                  className="flex min-h-[32svh] min-w-full snap-center items-end justify-center sm:min-h-[42svh] lg:min-h-[50svh]"
+                  key={stat.label}
+                  className="border border-fischer-line bg-paper/70 p-4 shadow-[0_14px_45px_rgba(0,44,95,0.06)]"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={image.src}
-                    alt={`${vehicle.name} ${vehicle.subtitle} Ansicht ${index + 1}`}
-                    width={image.width}
-                    height={image.height}
-                    decoding="async"
-                    loading={index === 0 ? "eager" : "lazy"}
-                    draggable={false}
-                    className="mx-auto h-auto max-h-[50svh] w-auto max-w-full select-none object-contain drop-shadow-[0_42px_58px_rgba(0,0,0,0.65)]"
-                  />
+                  <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-anthracite/50">
+                    {stat.label}
+                  </dt>
+                  <dd className="mt-2 break-words text-xl font-semibold leading-tight text-anthracite sm:text-2xl lg:text-[22px]">
+                    {stat.animated ? (
+                      <AnimatedStatValue
+                        target={stat.target}
+                        suffix={stat.suffix ?? ""}
+                        fallback={stat.value}
+                        delay={stat.label === "Kilometer" ? 140 : 0}
+                      />
+                    ) : (
+                      stat.value
+                    )}
+                  </dd>
                 </div>
               ))}
+            </dl>
+          </div>
+
+          <div className="min-w-0">
+            <div className="mb-5 hidden text-right lg:block">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-anthracite/45">
+                Preis
+              </p>
+              <p className="mt-2 text-2xl font-semibold text-anthracite">
+                {vehicle.price || "Auf Anfrage"}
+              </p>
             </div>
-            <div className="absolute -bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-2">
-              {productImages.map((image, index) => (
-                <button
-                  key={image.src}
-                  type="button"
-                  aria-label={`Produktbild ${index + 1} anzeigen`}
-                  aria-pressed={slideIndex === index}
-                  onClick={() => scrollToSlide(index)}
-                  className={
-                    "h-1.5 rounded-full transition-all " +
-                    (slideIndex === index
-                      ? "w-7 bg-bone"
-                      : "w-1.5 bg-bone/35 hover:bg-bone/70")
-                  }
-                />
-              ))}
+
+            <div className="relative overflow-hidden rounded-[28px] border border-fischer-line bg-paper shadow-[0_34px_100px_rgba(0,44,95,0.14)]">
+              <div
+                aria-hidden
+                className="absolute inset-x-[10%] bottom-4 h-12 rounded-full bg-hyundai/12 blur-2xl sm:h-14"
+              />
+              <div
+                ref={sliderRef}
+                onScroll={handleSliderScroll}
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerEnd}
+                onPointerCancel={handlePointerEnd}
+                className={
+                  "relative z-10 flex overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden " +
+                  (isDragging
+                    ? "snap-none cursor-grabbing"
+                    : "snap-x snap-mandatory cursor-grab")
+                }
+              >
+                {productImages.map((image, index) => (
+                  <div
+                    key={image.src}
+                    className="flex aspect-[16/11] min-w-full snap-center items-center justify-center p-5 sm:p-8 lg:aspect-[16/10]"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={image.src}
+                      alt={`${vehicle.name} ${vehicle.subtitle} Ansicht ${index + 1}`}
+                      width={image.width}
+                      height={image.height}
+                      decoding="async"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      draggable={false}
+                      className="mx-auto h-auto max-h-[430px] w-auto max-w-full select-none object-contain drop-shadow-[0_26px_40px_rgba(0,44,95,0.16)] lg:max-h-[500px]"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+                {productImages.map((image, index) => (
+                  <button
+                    key={image.src}
+                    type="button"
+                    aria-label={`Produktbild ${index + 1} anzeigen`}
+                    aria-pressed={slideIndex === index}
+                    onClick={() => scrollToSlide(index)}
+                    className={
+                      "h-1.5 transition-all " +
+                      (slideIndex === index
+                        ? "w-7 bg-hyundai"
+                        : "w-1.5 bg-anthracite/25 hover:bg-hyundai/70")
+                    }
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <dl className="relative z-10 mx-auto grid w-full max-w-[1180px] grid-cols-1 gap-7 px-6 pb-10 pt-4 sm:grid-cols-3 sm:px-12 sm:pb-14 lg:px-20">
-        {stats.map((stat) => (
-          <div key={stat.label}>
-            <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-bone/66">
-              {stat.label}
-            </dt>
-            <dd className="mt-3 text-3xl font-black uppercase leading-none text-bone sm:text-4xl">
-              {stat.animated ? (
-                <AnimatedStatValue
-                  target={stat.target}
-                  suffix={stat.suffix ?? ""}
-                  fallback={stat.value}
-                  delay={stat.label === "Kilometer" ? 140 : 0}
-                />
-              ) : (
-                stat.value
-              )}
-            </dd>
-          </div>
-        ))}
-      </dl>
     </section>
   );
 }

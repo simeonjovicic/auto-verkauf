@@ -24,6 +24,10 @@ function getOverviewPoints(vehicle: Vehicle) {
 export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
   const isDrawer = mode === "drawer";
   const overviewPoints = getOverviewPoints(vehicle);
+  const showWillhabenLink =
+    vehicle.category === "Gebrauchtwagen" ||
+    vehicle.category === "Klassiker" ||
+    !["Hyundai", "Mitsubishi"].includes(vehicle.brand);
 
   return (
     <>
@@ -32,8 +36,8 @@ export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
       <section
         className={
           isDrawer
-            ? "bg-ink px-5 py-10 text-bone sm:px-8 sm:py-12"
-            : "bg-ink px-6 py-20 text-bone sm:px-12 sm:py-24 lg:px-20"
+            ? "bg-paper px-5 py-10 text-anthracite sm:px-8 sm:py-12"
+            : "bg-paper px-6 py-20 text-anthracite sm:px-12 sm:py-24 lg:px-20"
         }
       >
         <div
@@ -44,14 +48,14 @@ export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
           }
         >
           <div className={isDrawer ? "xl:col-span-7" : "lg:col-span-7"}>
-            <p className="eyebrow text-mute">Überblick</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-hyundai">Überblick</p>
             <div className="mt-6 max-w-[760px]">
-              <h2 className="serif text-4xl leading-tight text-bone sm:text-5xl">
+              <h2 className="text-4xl font-semibold leading-tight tracking-tight text-anthracite sm:text-5xl">
                 {vehicle.name} {vehicle.subtitle}: klar dokumentiert, sofort
                 anfragbar.
               </h2>
             </div>
-            <div className="serif mt-8 space-y-6 text-lg leading-relaxed text-bone/82 sm:text-xl">
+            <div className="mt-8 space-y-6 text-lg leading-relaxed text-fischer-mute sm:text-xl">
               <p>
                 Bei Fischerauto wird jedes Angebot persönlich besprochen:
                 Ausstattung, Verfügbarkeit, Finanzierung, Versicherung und
@@ -69,26 +73,26 @@ export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
                 {overviewPoints.map((point) => (
                   <div
                     key={point}
-                    className="border border-line bg-bone/[0.03] px-5 py-4"
+                    className="border border-fischer-line bg-surface-soft px-5 py-4"
                   >
-                    <p className="text-sm leading-relaxed text-bone">{point}</p>
+                    <p className="text-sm leading-relaxed text-anthracite">{point}</p>
                   </div>
                 ))}
               </div>
             ) : null}
 
-            <div className="mt-14 grid grid-cols-1 gap-8 border-y border-line py-10 sm:grid-cols-3">
+            <div className="mt-14 grid grid-cols-1 gap-8 border-y border-fischer-line py-10 sm:grid-cols-3">
               {[
                 ["01", "Beratung", "Modell, Ausstattung, Lieferzeit und Budget werden direkt mit dem Team geklärt."],
                 ["02", "Besichtigung", "Probefahrt, Schauraumtermin oder Gebrauchtwagencheck werden passend vorbereitet."],
                 ["03", "Abwicklung", "Finanzierung, Leasing, Versicherung, Service und Ersatzwagen bleiben unter einem Dach."],
               ].map(([num, title, copy]) => (
                 <div key={num}>
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
                     {num}
                   </p>
-                  <h3 className="serif mt-4 text-2xl text-bone">{title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-mute">
+                  <h3 className="mt-4 text-2xl font-semibold text-anthracite">{title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-fischer-mute">
                     {copy}
                   </p>
                 </div>
@@ -102,36 +106,36 @@ export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
 
           <aside className={isDrawer ? "xl:col-span-5" : "lg:col-span-5"}>
             <SpecTable vehicle={vehicle} />
-            <div className="mt-12 border border-line bg-bone/[0.03] p-6">
-              <p className="eyebrow text-mute">Vor Ort</p>
-              <p className="serif mt-4 text-2xl leading-tight text-bone">
+            <div className="mt-12 border border-fischer-line bg-surface-soft p-6">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-hyundai">Vor Ort</p>
+              <p className="mt-4 text-2xl font-semibold leading-tight text-anthracite">
                 Wagramer Straße 36A, 1220 Wien.
               </p>
-              <p className="mt-4 text-sm leading-relaxed text-mute">
+              <p className="mt-4 text-sm leading-relaxed text-fischer-mute">
                 Kundenparkplatz, Schauraumflächen im Untergeschoß und auf dem
                 Dach sowie persönliche Ansprechpartner für Verkauf und Service.
               </p>
-              {vehicle.brand === "Gebrauchtwagen" ? (
+              {showWillhabenLink ? (
                 <a
                   href={WILLHABEN_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex text-[11px] uppercase tracking-[0.2em] text-bone hover:text-gold"
+                  className="mt-5 inline-flex text-[11px] font-semibold uppercase tracking-[0.2em] text-hyundai hover:text-hyundai-deep"
                 >
-                  Live-Bestand auf willhaben ansehen →
+                  Live-Bestand auf willhaben ansehen
                 </a>
               ) : null}
             </div>
             <div className="mt-12">
-              <p className="eyebrow text-mute">Standort</p>
-              <p className="mt-4 text-sm leading-relaxed text-bone">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-hyundai">Standort</p>
+              <p className="mt-4 text-sm leading-relaxed text-anthracite">
                 {SITE.name}
                 <br />
                 {SITE.address.street}
                 <br />
                 {SITE.address.postal} {SITE.address.city}, {SITE.address.country}
               </p>
-              <p className="mt-2 text-xs text-mute">
+              <p className="mt-2 text-xs text-fischer-mute">
                 Verkauf, Service, Teile und Finanzierung am selben Standort
               </p>
             </div>
@@ -139,10 +143,10 @@ export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
         </div>
 
         {!isDrawer ? (
-          <div className="mx-auto mt-24 max-w-[1440px] border-t border-line pt-8">
+          <div className="mx-auto mt-24 max-w-[1440px] border-t border-fischer-line pt-8">
             <Link
               href="/fahrzeuge/"
-              className="text-[11px] uppercase tracking-[0.2em] text-mute hover:text-bone"
+              className="text-[11px] font-semibold uppercase tracking-[0.2em] text-fischer-mute hover:text-hyundai"
             >
               Zurück zur Übersicht
             </Link>

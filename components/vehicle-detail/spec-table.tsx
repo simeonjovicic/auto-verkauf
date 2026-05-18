@@ -5,7 +5,7 @@ const LABELS: Record<keyof Vehicle["specs"], string> = {
   mileage: "Kilometerstand",
   horsepower: "Leistung",
   transmission: "Getriebe",
-  color: "Farbe",
+  color: "Hinweise",
 };
 
 export function SpecTable({ vehicle }: { vehicle: Vehicle }) {
@@ -15,10 +15,10 @@ export function SpecTable({ vehicle }: { vehicle: Vehicle }) {
 
   return (
     <div>
-      <p className="eyebrow text-mute">Technische Daten</p>
-      <dl className="mt-6 divide-y divide-line border-y border-line">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-hyundai">Technische Daten</p>
+      <dl className="mt-6 divide-y divide-fischer-line border-y border-fischer-line">
         {entries.length === 0 ? (
-          <div className="py-5 text-sm text-mute">
+          <div className="py-5 text-sm text-fischer-mute">
             Vollständige Daten auf Anfrage.
           </div>
         ) : (
@@ -27,8 +27,8 @@ export function SpecTable({ vehicle }: { vehicle: Vehicle }) {
               key={key}
               className="grid grid-cols-2 gap-4 py-4 text-sm sm:py-5"
             >
-              <dt className="text-mute">{LABELS[key]}</dt>
-              <dd className="text-bone">{value}</dd>
+              <dt className="text-fischer-mute">{LABELS[key]}</dt>
+              <dd className="text-anthracite">{value}</dd>
             </div>
           ))
         )}

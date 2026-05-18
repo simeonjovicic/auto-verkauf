@@ -13,12 +13,12 @@ export function SimilarVehicles({ current }: { current: Vehicle }) {
   if (picks.length === 0) return null;
 
   return (
-    <section className="border-t border-line bg-ink px-6 py-20 sm:px-12 sm:py-24 lg:px-20">
+    <section className="border-t border-fischer-line bg-surface px-6 py-20 sm:px-12 sm:py-24 lg:px-20">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="eyebrow text-mute">Weiterführend</p>
-            <h2 className="serif mt-3 text-3xl text-bone sm:text-4xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-hyundai">Weiterführend</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-anthracite sm:text-4xl">
               Ähnliche Fahrzeuge
             </h2>
           </div>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter_Tight, Fraunces } from "next/font/google";
 import { Header } from "@/components/nav/header";
 import { Footer } from "@/components/footer/footer";
+import { ThemeProvider } from "@/components/theme/theme-context";
+import { ThemeScript } from "@/components/theme/theme-script";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -54,12 +56,19 @@ export default function RootLayout({
   return (
     <html
       lang="de-AT"
+      data-theme="fischer"
+      suppressHydrationWarning
       className={`${interTight.variable} ${fraunces.variable} h-full antialiased`}
     >
+      <head>
+        <ThemeScript />
+      </head>
       <body className="min-h-full bg-ink text-bone font-sans">
-        <Header />
-        {children}
-        <Footer />
+        <ThemeProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

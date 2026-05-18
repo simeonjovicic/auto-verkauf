@@ -156,7 +156,7 @@ export function VehicleDetailTransitionLink({
           aria-modal="true"
           aria-label={`${vehicle.name} ${vehicle.subtitle}`}
           className={
-            "fixed inset-0 z-[80] overflow-y-auto bg-ink text-bone shadow-[-36px_0_110px_rgba(0,0,0,0.45)] transition-transform duration-[680ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] " +
+            "fixed inset-0 z-[80] overflow-y-auto bg-paper text-anthracite shadow-[-36px_0_110px_rgba(0,44,95,0.18)] transition-transform duration-[680ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] " +
             (entered ? "translate-x-0" : "translate-x-full")
           }
         >
@@ -164,7 +164,7 @@ export function VehicleDetailTransitionLink({
             type="button"
             aria-label="Zurück zur Übersicht"
             onClick={closeOverlay}
-            className="fixed left-4 top-4 z-[90] inline-flex h-11 w-11 items-center justify-center border border-line bg-ink/70 text-bone backdrop-blur-md transition-colors hover:border-gold hover:text-gold sm:left-8 sm:top-6"
+            className="fixed left-4 top-4 z-[90] inline-flex h-11 w-11 items-center justify-center border border-fischer-line bg-paper/80 text-anthracite backdrop-blur-md transition-colors hover:border-hyundai hover:text-hyundai sm:left-8 sm:top-6"
           >
             <ArrowLeft size={18} strokeWidth={1.5} />
           </button>

@@ -31,18 +31,17 @@ function getSpecs(vehicle: Vehicle): SpecRow[] {
 export function VehicleCard({ vehicle }: Props) {
   const accent = ACCENT[vehicle.gradient];
   const specs = getSpecs(vehicle);
-
-  const titleSegments = [
-    `${vehicle.name} ${vehicle.subtitle}`,
-    ...(vehicle.highlight?.split(" · ") ?? []),
-  ];
+  const imageClass =
+    vehicle.src.endsWith(".png") && !vehicle.src.includes("team")
+      ? "absolute inset-0 h-full w-full object-contain p-5 transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
+      : "absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]";
 
   return (
     <VehicleDetailTransitionLink
       vehicle={vehicle}
       href={`/fahrzeuge/${vehicle.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden bg-ink text-bone shadow-[0_24px_80px_rgba(0,0,0,0.45)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_36px_110px_rgba(0,0,0,0.6)]"
-      aria-label={`${vehicle.name} ${vehicle.subtitle} — Details ansehen`}
+      className="group relative flex h-full flex-col overflow-hidden border border-fischer-line bg-surface-soft text-anthracite shadow-[0_18px_50px_rgba(0,44,95,0.08)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(0,44,95,0.14)]"
+      aria-label={`${vehicle.name} ${vehicle.subtitle} - Details ansehen`}
       style={{ "--vehicle-card-accent": accent } as React.CSSProperties}
     >
       {/* Top accent line */}
@@ -56,9 +55,11 @@ export function VehicleCard({ vehicle }: Props) {
       />
 
       {/* Image container */}
-      <div className="relative aspect-4/3 overflow-hidden bg-stage">
+      <div className="relative aspect-4/3 overflow-hidden bg-paper">
         <picture>
-          <source srcSet={vehicle.srcAvif} type="image/avif" />
+          {vehicle.srcAvif.endsWith(".avif") ? (
+            <source srcSet={vehicle.srcAvif} type="image/avif" />
+          ) : null}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={vehicle.src}
@@ -68,53 +69,50 @@ export function VehicleCard({ vehicle }: Props) {
             loading="lazy"
             decoding="async"
             draggable={false}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
+            className={imageClass}
           />
         </picture>
         
-        {/* Simple gradient overlay instead of complex glare */}
         <div 
-          className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent opacity-60 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-40" 
+          className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-anthracite/28 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-45" 
           aria-hidden 
         />
       </div>
 
-      {/* Content area */}
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <div className="mb-6">
-          <p className="eyebrow text-bone/70">{vehicle.brand}</p>
-          <h3 className="serif mt-2 text-2xl text-bone sm:text-3xl">
-            {titleSegments.map((segment, i) => (
-              <span key={i}>
-                {segment}
-                {i < titleSegments.length - 1 && (
-                  <span className="mx-2 text-bone/40">·</span>
-                )}
-              </span>
-            ))}
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-hyundai">{vehicle.brand}</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight text-anthracite sm:text-3xl">
+            {vehicle.name}
+            <span className="block text-copper">{vehicle.subtitle}</span>
           </h3>
+          {vehicle.highlight ? (
+            <p className="mt-3 text-sm leading-relaxed text-fischer-mute">
+              {vehicle.highlight}
+            </p>
+          ) : null}
         </div>
 
         <div className="grid grid-cols-2 gap-x-4 gap-y-4">
           {specs.map((s) => (
             <div key={s.label}>
-              <dt className="text-[10px] uppercase tracking-[0.2em] text-mute">
+              <dt className="text-[10px] uppercase tracking-[0.2em] text-anthracite/45">
                 {s.label}
               </dt>
-              <dd className="mt-1 text-[13px] text-bone/90">{s.value}</dd>
+              <dd className="mt-1 text-[13px] text-anthracite/82">{s.value}</dd>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 flex items-end justify-between pt-6 border-t border-line/50">
-          <p className="text-lg text-bone sm:text-xl">
+        <div className="mt-8 flex items-end justify-between border-t border-fischer-line pt-6">
+          <p className="text-lg font-semibold text-anthracite sm:text-xl">
             {vehicle.price || "Preis auf Anfrage"}
           </p>
           <span
-            className="text-[11px] font-medium uppercase tracking-[0.2em] text-mute transition-colors group-hover:text-gold"
+            className="text-[11px] font-semibold uppercase tracking-[0.2em] text-fischer-mute transition-colors group-hover:text-hyundai"
             aria-hidden
           >
-            Anfragen →
+            Anfragen
           </span>
         </div>
       </div>
