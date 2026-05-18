@@ -1,129 +1,131 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 
+const COLUMNS = [
+  {
+    title: "Fahrzeuge",
+    links: [
+      { href: "/fahrzeuge", label: "Gesamter Bestand" },
+      { href: "/fahrzeuge?kategorie=elektro", label: "Elektro & Hybrid" },
+      { href: "/fahrzeuge?kategorie=eintausch", label: "Eintauschwagen" },
+      { href: "/marken", label: "Marken" },
+    ],
+  },
+  {
+    title: "Service",
+    links: [
+      { href: "/service", label: "Werkstatt" },
+      { href: "/service#pickerl", label: "§57a / Pickerl" },
+      { href: "/service#reifen", label: "Reifen & Einlagerung" },
+      { href: "/service#unfall", label: "Unfallhilfe" },
+    ],
+  },
+  {
+    title: "Haus",
+    links: [
+      { href: "/unternehmen", label: "Über uns" },
+      { href: "/unternehmen#team", label: "Team" },
+      { href: "/kontakt", label: "Standort" },
+      { href: "/insights", label: "Aktuelles" },
+    ],
+  },
+] as const;
+
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line bg-ink text-bone">
-      <div className="mx-auto grid max-w-360 grid-cols-1 gap-y-12 px-6 py-16 sm:px-12 lg:grid-cols-12 lg:gap-x-16 lg:px-20 lg:py-20">
+    <footer className="bg-anthracite text-paper">
+      <div className="mx-auto grid max-w-360 grid-cols-1 gap-12 px-6 py-20 sm:px-12 sm:py-24 lg:grid-cols-12 lg:gap-x-16 lg:px-20">
         {/* Brand */}
         <div className="lg:col-span-4">
-          <Link href="/" className="inline-flex items-center gap-3 text-bone">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/fischerauto/logo.png"
-              alt="Fischerauto Logo"
-              className="h-8 w-auto object-contain"
-              loading="lazy"
-              decoding="async"
-            />
+          <Link href="/" className="inline-block">
+            <span className="text-xl font-semibold tracking-tight text-paper">
+              Autohaus Fischer
+            </span>
           </Link>
-          <p className="mt-6 max-w-[36ch] text-sm leading-relaxed text-mute">
-            Wiener Familienbetrieb seit 1974. Hyundai und Mitsubishi,
-            geprüfte Eintauschwagen, Werkstatt, Teile, Finanzierung und
-            Leasing unter einem Dach.
+          <p className="mt-5 max-w-[40ch] text-sm leading-relaxed text-paper/55">
+            {SITE.legalName} · {SITE.address.street} · {SITE.address.postal}{" "}
+            {SITE.address.city} · Familienbetrieb in 3. Generation seit{" "}
+            {SITE.founded}.
           </p>
-        </div>
 
-        {/* Standort Wien */}
-        <div className="lg:col-span-3">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-mute">
-            Standort Wien
-          </p>
-          <address className="not-italic mt-4 space-y-1 text-sm leading-relaxed text-bone/90">
-            <div>{SITE.address.street}</div>
-            <div>
-              {SITE.address.postal}, {SITE.address.country}
-            </div>
-            <div className="text-mute">{SITE.address.district}</div>
-          </address>
-          <ul className="mt-5 space-y-2 text-sm">
-            <li>
+          <div className="mt-8 space-y-2 text-sm text-paper/75">
+            <p>
               <a
                 href={`tel:${SITE.phone.replace(/\s/g, "")}`}
-                className="text-bone/90 transition-colors hover:text-gold"
+                className="transition-colors hover:text-paper"
               >
                 {SITE.phoneDisplay}
               </a>
-            </li>
-            <li>
+            </p>
+            <p>
               <a
                 href={`mailto:${SITE.email}`}
-                className="text-bone/90 transition-colors hover:text-gold"
+                className="transition-colors hover:text-paper"
               >
                 {SITE.email}
               </a>
-            </li>
-            <li className="text-mute">Öffnungszeiten · {SITE.hours}</li>
-          </ul>
+            </p>
+          </div>
         </div>
 
-        {/* Bestand */}
+        {/* Link columns */}
+        {COLUMNS.map((col) => (
+          <div key={col.title} className="lg:col-span-2 lg:col-start-auto">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-paper/45">
+              {col.title}
+            </p>
+            <ul className="mt-5 space-y-3 text-[15px] text-paper/85">
+              {col.links.map((l) => (
+                <li key={l.href + l.label}>
+                  <Link
+                    href={l.href}
+                    className="transition-colors hover:text-paper"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        {/* Legal */}
         <div className="lg:col-span-2">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-mute">Autohaus</p>
-          <ul className="mt-4 space-y-2 text-sm text-bone/90">
-            <li>
-              <Link href="/fahrzeuge" className="transition-colors hover:text-gold">
-                Fahrzeuge
-              </Link>
-            </li>
-            <li>
-              <Link href="/marken" className="transition-colors hover:text-gold">
-                Marken
-              </Link>
-            </li>
-            <li>
-              <Link href="/service" className="transition-colors hover:text-gold">
-                Service
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Über */}
-        <div className="lg:col-span-3">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-mute">
-            Über
+          <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-paper/45">
+            Rechtliches
           </p>
-          <ul className="mt-4 space-y-2 text-sm text-bone/90">
+          <ul className="mt-5 space-y-3 text-[15px] text-paper/85">
             <li>
-              <Link href="/insights" className="transition-colors hover:text-gold">
-                Aktuelles
+              <Link href="/impressum" className="transition-colors hover:text-paper">
+                Impressum
               </Link>
             </li>
             <li>
-              <Link href="/virtueller-rundgang" className="transition-colors hover:text-gold">
-                Videos &amp; Rundgang
+              <Link
+                href="/datenschutzerklaerung"
+                className="transition-colors hover:text-paper"
+              >
+                Datenschutz
               </Link>
             </li>
             <li>
-              <Link href="/unternehmen" className="transition-colors hover:text-gold">
-                Unternehmen
-              </Link>
-            </li>
-            <li>
-              <Link href="/kontakt" className="transition-colors hover:text-gold">
-                Kontakt
+              <Link
+                href="/teilnahmebedingung"
+                className="transition-colors hover:text-paper"
+              >
+                AGB
               </Link>
             </li>
           </ul>
         </div>
       </div>
 
-      <div className="border-t border-line">
-        <div className="mx-auto flex max-w-360 flex-col items-start justify-between gap-2 px-6 py-6 text-[11px] uppercase tracking-[0.22em] text-mute sm:flex-row sm:items-center sm:px-12 lg:px-20">
-          <p>
-            © {SITE.legalName} {year}. Alle Rechte vorbehalten.
-          </p>
-          <div className="flex items-center gap-6">
-            <Link href="/impressum" className="transition-colors hover:text-gold">
-              Impressum
-            </Link>
-            <Link href="/datenschutzerklaerung" className="transition-colors hover:text-gold">
-              Datenschutz
-            </Link>
-          </div>
+      <div className="border-t border-paper/10">
+        <div className="mx-auto flex max-w-360 flex-col items-start justify-between gap-2 px-6 py-6 text-[10px] uppercase tracking-[0.22em] text-paper/40 sm:flex-row sm:items-center sm:px-12 lg:px-20">
+          <p>© {SITE.legalName} {year}. Alle Rechte vorbehalten.</p>
+          <p>Wagramer Straße 36a · 1220 Wien</p>
         </div>
       </div>
     </footer>

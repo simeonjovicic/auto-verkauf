@@ -19,16 +19,17 @@
   --color-hero-sky: #9bb8d4;
   --color-hero-slate: #8a8d94;
 
-  /* Fischer (Hyundai dealer) palette — used by the Fischer home variant. */
+  /* Fischer (Hyundai dealer) palette — warm editorial / magazine cream. */
   --color-hyundai: #002C5F;
   --color-hyundai-deep: #001E42;
-  --color-anthracite: #1A1A1A;
-  --color-paper: #FFFFFF;
-  --color-surface: #F5F4F1;
-  --color-surface-soft: #FAF8F4;
-  --color-copper: #C97B3C;
-  --color-fischer-line: rgb(26 26 26 / 0.10);
-  --color-fischer-mute: #5b5b5b;
+  --color-hyundai-bright: #0047A0;
+  --color-anthracite: #14110D;
+  --color-paper: #F5F0E2;
+  --color-surface: #EFE9D8;
+  --color-surface-soft: #F2ECDC;
+  --color-copper: #B85C2E;
+  --color-fischer-line: rgb(20 17 13 / 0.12);
+  --color-fischer-mute: #6b6253;
 
   --font-sans: var(--font-sans), system-ui, sans-serif;
   --font-serif: var(--font-serif), Georgia, serif;
@@ -71,28 +72,6 @@ body {
 html[data-theme="fischer"] ::selection {
   background: var(--color-hyundai);
   color: var(--color-paper);
-}
-
-html[data-theme="fischer"] footer {
-  border-color: var(--color-fischer-line);
-  background: var(--color-surface);
-  color: var(--color-anthracite);
-}
-
-html[data-theme="fischer"] footer .border-line {
-  border-color: var(--color-fischer-line);
-}
-
-html[data-theme="fischer"] footer .text-mute {
-  color: var(--color-fischer-mute);
-}
-
-html[data-theme="fischer"] footer .text-bone\/90 {
-  color: rgb(26 26 26 / 0.86);
-}
-
-html[data-theme="fischer"] footer .hover\:text-gold:hover {
-  color: var(--color-hyundai);
 }
 
 a:focus-visible,

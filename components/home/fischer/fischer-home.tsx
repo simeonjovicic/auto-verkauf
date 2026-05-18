@@ -1,9 +1,11 @@
 import { FischerHero } from "./fischer-hero";
 import { FischerTrust } from "./fischer-trust";
 import { FischerAktionen } from "./fischer-aktionen";
+import { FischerInhaberQuote } from "./fischer-inhaber-quote";
+import { FischerAngebotWoche } from "./fischer-angebot-woche";
+import { FischerTeam } from "./fischer-team";
 import { FischerFamilie } from "./fischer-familie";
 import { FischerService } from "./fischer-service";
-import { FischerQuote } from "./fischer-quote";
 import { FischerContact } from "./fischer-contact";
 import { FischerMobileCall } from "./fischer-mobile-call";
 
@@ -13,9 +15,11 @@ export function FischerHome() {
       <FischerHero />
       <FischerTrust />
       <FischerAktionen />
+      <FischerInhaberQuote />
+      <FischerAngebotWoche />
+      <FischerTeam />
       <FischerFamilie />
       <FischerService />
-      <FischerQuote />
       <FischerContact />
       <FischerMobileCall />
     </div>
