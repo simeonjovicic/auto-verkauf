@@ -5,7 +5,7 @@ import { vehicles, type Vehicle, type Brand } from "@/lib/vehicles";
 import { VehicleCard } from "./vehicle-card";
 import type { Sort } from "./filter-bar";
 
-const ALL_BRANDS: Brand[] = ["Ferrari", "Porsche", "BMW"];
+const ALL_BRANDS: Brand[] = ["Hyundai", "Mitsubishi", "Gebrauchtwagen"];
 
 const SORT_OPTIONS: { value: Sort; label: string }[] = [
   { value: "newest",     label: "Neu zuerst" },
@@ -160,7 +160,7 @@ export function VehicleGrid({ initial }: { initial?: Vehicle[] } = {}) {
           </p>
           <p className="mt-3 text-sm text-mute">
             Setzen Sie die Filter zurück oder sprechen Sie uns direkt an —
-            unser Bestand rotiert laufend.
+            die Angebote ändern sich laufend.
           </p>
           <button
             type="button"

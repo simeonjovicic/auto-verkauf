@@ -15,12 +15,13 @@ export function InventorySection() {
             id="fahrzeuge-title"
             className="serif mt-6 max-w-3xl text-4xl leading-[1.05] text-bone sm:text-5xl lg:text-6xl"
           >
-            {vehicles.length} geprüfte Fahrzeuge{" "}
-            <span className="italic text-bone/55">im aktuellen Bestand.</span>
+            Neuwagen, Aktionen und geprüfte Eintauschwagen{" "}
+            <span className="italic text-bone/55">auf einen Blick.</span>
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-mute sm:text-lg">
-            Eine kuratierte Auswahl: klare Daten, dunkle Bühne und schnelle
-            Filter für den ersten Vergleich.
+            Aktionsmodelle werden hier hervorgehoben. Der tagesaktuelle
+            Gebrauchtwagenbestand wird über willhaben gepflegt und ändert sich
+            laufend.
           </p>
         </div>
         <VehicleGrid />

@@ -1,10 +1,6 @@
 import { AnimatedStats } from "./animated-stats";
-import { ParallaxImage } from "./parallax-image";
-import { getVehicle } from "@/lib/vehicles";
 
 export function Philosophy() {
-  const accent = getVehicle("ferrari-458-speciale-aperta")!;
-
   return (
     <section
       id="philosophie"
@@ -18,52 +14,53 @@ export function Philosophy() {
             id="philosophie-title"
             className="serif mt-6 text-4xl leading-[1.05] text-bone sm:text-5xl lg:text-6xl"
           >
-            Ruhig, klar, persönlich.{" "}
-            <span className="italic text-bone/55">Ein Bestand mit Substanz.</span>
+            Seit 1974 in Familienhand.{" "}
+            <span className="italic text-bone/55">Mit kurzen Wegen für alles rund ums Auto.</span>
           </h2>
           <div className="mt-10 max-w-prose space-y-5 text-base leading-relaxed text-mute sm:text-lg">
             <p>
-              Meyer Motorsport verbindet die Erfahrung eines spezialisierten
-              Sportwagenhauses mit einer ruhigen, transparenten Beratung. Jeder
-              Wagen wird einzeln geprüft, dokumentiert und in Wien persönlich
-              vorgestellt.
+              Fischerauto wurde von Franz und Monika Fischer gegründet und ist
+              bis heute ein Wiener Betrieb in Familienhand. Mehrere Generationen
+              arbeiten am Standort in der Wagramer Straße Hand in Hand.
             </p>
             <p>
-              Ferrari, Porsche und BMW M bleiben hier nicht anonyme Inserate,
-              sondern nachvollziehbare Fahrzeuge: Zustand, Historie, Laufleistung
-              und Charakter werden vor Ort gemeinsam besprochen.
+              Verkauf, Service, Teile, Finanzierung, Leasing und
+              Versicherungsberatung liegen unter einem Dach. Dadurch bleiben
+              Ansprechpartner, Wege und Entscheidungen klar.
             </p>
             <p>
-              So entsteht ein Autohaus-Erlebnis, das ruhig und direkt wirkt:
-              kurze Wege, klare Antworten und ein Bestand, der nicht nach Masse,
-              sondern nach Qualität zusammengestellt ist.
+              Ausstellungsflächen im Untergeschoß und auf dem Dach, ein
+              Kundenparkplatz und ein eingespieltes Team sorgen für eine
+              persönliche, familiäre Atmosphäre.
             </p>
           </div>
           <AnimatedStats />
         </div>
         <div className="lg:col-span-6">
           <div className="overflow-hidden border border-line bg-ink shadow-[0_24px_70px_rgba(0,0,0,0.45)]">
-            <ParallaxImage
-              src={accent.src}
-              srcAvif={accent.srcAvif}
-              alt={accent.alt}
-              width={accent.width}
-              height={accent.height}
-              className="aspect-4/3 w-full bg-stage"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/fischerauto/team.png"
+              alt="Fischerauto Team im Schauraum in Wien"
+              width={1000}
+              height={606}
+              loading="lazy"
+              decoding="async"
+              className="aspect-4/3 w-full bg-stage object-cover"
             />
             <div className="grid gap-4 border-t border-line p-5 sm:grid-cols-[1.2fr_0.8fr] sm:p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-bone">
-                {accent.name} {accent.subtitle}
+                Familie und Team Fischerauto
               </p>
               <p className="text-sm leading-relaxed text-mute sm:text-right">
-                Aktueller Bestand, Besichtigung nach Vereinbarung.
+                Persönliche Beratung in Wien-Donaustadt.
               </p>
             </div>
           </div>
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <Feature label="Historie" value="nachvollziehbar" />
-            <Feature label="Besichtigung" value="in Wien" />
-            <Feature label="Anfrage" value="direkt persönlich" />
+            <Feature label="Seit" value="1974" />
+            <Feature label="Marken" value="Hyundai & Mitsubishi" />
+            <Feature label="Service" value="alle Fabrikate" />
           </div>
         </div>
       </div>

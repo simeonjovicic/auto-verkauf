@@ -114,7 +114,7 @@ export function VehicleCard({ vehicle }: Props) {
             className="text-[11px] font-medium uppercase tracking-[0.2em] text-mute transition-colors group-hover:text-gold"
             aria-hidden
           >
-            Detailansicht →
+            Anfragen →
           </span>
         </div>
       </div>

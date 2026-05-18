@@ -4,9 +4,9 @@ import { PageHero } from "@/components/layout/page-hero";
 import { posts } from "@/lib/insights";
 
 export const metadata: Metadata = {
-  title: "Insights",
+  title: "Aktuelles",
   description:
-    "Marktnotizen, Neuzugänge und Werkstattbesuche aus Wien — Insights aus dem Alltag eines spezialisierten Sportwagenhauses.",
+    "Aktuelles von Fischerauto: Hyundai, Service, Familienbetrieb und Angebote aus Wien-Donaustadt.",
 };
 
 const dateFormatter = new Intl.DateTimeFormat("de-AT", {
@@ -25,16 +25,16 @@ export default function InsightsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Insights"
-        title="Notizen aus dem Bestand."
-        lede="Marktnotizen, Neuzugänge und Werkstattbesuche aus Wien — kurze Texte zu langfristigen Themen."
+        eyebrow="Aktuelles"
+        title="Neuigkeiten aus dem Autohaus."
+        lede="Kurze Beiträge zu aktuellen Hyundai-Modellen, Service-Themen und dem Familienbetrieb in Wien-Donaustadt."
       />
       <section className="bg-ink px-6 py-20 text-bone sm:px-12 sm:py-24 lg:px-20">
         <div className="mx-auto max-w-360">
           {sorted.length === 0 ? (
             <p className="text-center text-mute">
-              Demnächst erscheinen hier Beiträge. Folgen Sie uns oder fragen Sie
-              direkt an.
+              Demnächst erscheinen hier Beiträge. Fragen Sie direkt beim Team
+              in der Wagramer Straße an.
             </p>
           ) : (
             <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">

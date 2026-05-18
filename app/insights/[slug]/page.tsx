@@ -51,7 +51,7 @@ export default async function InsightPage({
             href="/insights"
             className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-mute transition-colors hover:text-gold"
           >
-            <span aria-hidden>←</span> Alle Insights
+            <span aria-hidden>←</span> Alle Beiträge
           </Link>
           <p className="mt-10 text-[11px] uppercase tracking-[0.25em] text-gold">
             {post.eyebrow}
@@ -99,7 +99,7 @@ export default async function InsightPage({
           <div className="mx-auto max-w-360">
             <p className="eyebrow text-gold!">Weiterlesen</p>
             <h2 className="serif mt-6 text-3xl text-bone sm:text-4xl">
-              Mehr aus dem Bestand.
+              Mehr von Fischerauto.
             </h2>
             <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2">
               {others.map((p) => (

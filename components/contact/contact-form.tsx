@@ -9,7 +9,12 @@ import { SITE } from "@/lib/site";
 import { vehicles } from "@/lib/vehicles";
 
 const GENERAL = "allgemein" as const;
+const SERVICE = "service" as const;
+const REPAIR = "reparatur" as const;
+const NEW_CAR = "neuwagen" as const;
+const USED_CAR = "gebrauchtwagen" as const;
 const OTHER = "sonstiges" as const;
+const REQUEST_TYPES = [GENERAL, SERVICE, REPAIR, NEW_CAR, USED_CAR, OTHER] as const;
 
 const schema = z.object({
   name: z.string().min(2, "Bitte geben Sie Ihren Namen an."),
@@ -17,6 +22,9 @@ const schema = z.object({
   phone: z.string().optional(),
   fahrzeug: z.string(),
   message: z.string().min(10, "Bitte schreiben Sie ein paar Worte zu Ihrer Anfrage."),
+  privacy: z.boolean().refine((value) => value, {
+    message: "Bitte stimmen Sie der Verarbeitung Ihrer Angaben zu.",
+  }),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -28,7 +36,19 @@ function buildMailto(v: FormValues): string {
       : null;
 
   const subjectSuffix =
-    car ? `${car.name} ${car.subtitle}` : v.fahrzeug === OTHER ? "Sonstige Anfrage" : "Allgemeine Anfrage";
+    car
+      ? `${car.name} ${car.subtitle}`
+      : v.fahrzeug === SERVICE
+        ? "Service-Anfrage"
+        : v.fahrzeug === REPAIR
+          ? "Reparatur-Anfrage"
+          : v.fahrzeug === NEW_CAR
+            ? "Neuwagen-Anfrage"
+            : v.fahrzeug === USED_CAR
+              ? "Gebrauchtwagen-Anfrage"
+              : v.fahrzeug === OTHER
+                ? "Sonstige Anfrage"
+                : "Allgemeine Anfrage";
 
   const subject = `Anfrage: ${subjectSuffix}`;
 
@@ -38,16 +58,26 @@ function buildMailto(v: FormValues): string {
     v.phone ? `Telefon: ${v.phone}` : null,
     car
       ? `Fahrzeug: ${car.name} ${car.subtitle} (${car.num})`
-      : `Anliegen: ${v.fahrzeug === OTHER ? "Sonstiges" : "Allgemein"}`,
+      : `Anliegen: ${subjectSuffix}`,
     "",
     "Nachricht:",
     v.message,
     "",
     "—",
-    "Gesendet über meyer-motorsport.at",
+    "Gesendet über fischerauto.at",
   ].filter(Boolean) as string[];
 
   return `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+}
+
+function isKnownRequestType(value: string): boolean {
+  return REQUEST_TYPES.includes(value as (typeof REQUEST_TYPES)[number]);
+}
+
+function getInitialSelection(value: string): string {
+  if (vehicles.some((v) => v.slug === value)) return value;
+  if (isKnownRequestType(value)) return value;
+  return GENERAL;
 }
 
 export function ContactForm() {
@@ -67,19 +97,16 @@ export function ContactForm() {
       name: "",
       email: "",
       phone: "",
-      fahrzeug: vehicles.some((v) => v.slug === initialVehicle)
-        ? initialVehicle
-        : initialVehicle === OTHER
-          ? OTHER
-          : GENERAL,
+      fahrzeug: getInitialSelection(initialVehicle),
       message: "",
+      privacy: false,
     },
   });
 
   useEffect(() => {
     const v = searchParams.get("fahrzeug");
     if (!v) return;
-    if (vehicles.some((x) => x.slug === v) || v === OTHER) {
+    if (vehicles.some((x) => x.slug === v) || isKnownRequestType(v)) {
       setValue("fahrzeug", v);
     }
   }, [searchParams, setValue]);
@@ -100,7 +127,7 @@ export function ContactForm() {
     >
       <p id="form-help" className="text-xs text-mute">
         Pflichtfelder sind mit · gekennzeichnet. Beim Absenden öffnet sich Ihr
-        E-Mail-Programm mit einer vorbereiteten Nachricht.
+        E-Mail-Programm mit einer vorbereiteten Nachricht an Fischerauto.
       </p>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -134,14 +161,18 @@ export function ContactForm() {
         <Field label="Fahrzeug / Anliegen" error={errors.fahrzeug?.message}>
           <select {...register("fahrzeug")} className={inputClass(false)}>
             <option value={GENERAL}>Allgemeine Anfrage</option>
-            <optgroup label="Aktueller Bestand">
+            <option value={SERVICE}>Service</option>
+            <option value={REPAIR}>Reparatur</option>
+            <option value={NEW_CAR}>Neuwagen Hyundai / Mitsubishi</option>
+            <option value={USED_CAR}>Gebrauchtwagen / Eintauschwagen</option>
+            <optgroup label="Aktuelle Aktionen">
               {vehicles.map((v) => (
                 <option key={v.slug} value={v.slug}>
                   {v.name} {v.subtitle}
                 </option>
               ))}
             </optgroup>
-            <option value={OTHER}>Sonstiges (VIPs / Stunts / …)</option>
+            <option value={OTHER}>Sonstiges</option>
           </select>
         </Field>
       </div>
@@ -154,11 +185,28 @@ export function ContactForm() {
         />
       </Field>
 
+      <label className="flex gap-3 text-sm leading-relaxed text-mute">
+        <input
+          type="checkbox"
+          {...register("privacy")}
+          className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-gold"
+        />
+        <span>
+          Ich stimme zu, dass meine Angaben zur Bearbeitung der Anfrage
+          verarbeitet werden. ·
+          {errors.privacy ? (
+            <span className="ml-1 text-gold" role="alert">
+              {errors.privacy.message}
+            </span>
+          ) : null}
+        </span>
+      </label>
+
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-mute" aria-live="polite">
           {submitted
             ? "E-Mail-Programm geöffnet — bitte dort senden."
-            : "Wir antworten meist innerhalb desselben Tages."}
+            : "Das Team in der Wagramer Straße meldet sich bei Ihnen."}
         </p>
         <button
           type="submit"

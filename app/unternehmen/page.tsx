@@ -1,22 +1,18 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/page-hero";
-import { ParallaxImage } from "@/components/home/parallax-image";
-import { vehicles } from "@/lib/vehicles";
+import { TEAM } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Unternehmen",
+  title: "Über uns",
   description:
-    "Seit über 40 Jahren handelt Manfred Meyer mit ausgewählten Sportwagen. Meyer Motorsport in Wien — Heritage, Sorgfalt, Vertrauen.",
+    "Fischerauto ist seit 1974 ein Wiener Familienbetrieb. Hyundai, Mitsubishi, Service, Teile und Finanzierung in Wien-Donaustadt.",
 };
 
-const portrait =
-  vehicles.find((v) => v.slug === "porsche-718-spyder-4-0") ?? vehicles[0];
-
 const STATS = [
-  { value: "1983", label: "Gegründet" },
-  { value: "40+", label: "Jahre Erfahrung" },
-  { value: "Wien", label: "Standort" },
-  { value: "300+", label: "Fahrzeuge vermittelt" },
+  { value: "1974", label: "Gegründet" },
+  { value: "Familie", label: "in mehreren Generationen" },
+  { value: "Hyundai", label: "Hauptmarke" },
+  { value: "1220", label: "Wien-Donaustadt" },
 ];
 
 export default function UnternehmenPage() {
@@ -24,8 +20,8 @@ export default function UnternehmenPage() {
     <>
       <PageHero
         eyebrow="Über uns"
-        title="Vier Jahrzehnte Sportwagen — eine Adresse."
-        lede="Meyer Motorsport ist ein Familienbetrieb in Wien-Favoriten. Was 1983 mit einer Leidenschaft für italienische Sportwagen begann, ist heute eine der ältesten Adressen Österreichs für ausgewählte Ferrari, Porsche und BMW M Sammlerstücke."
+        title="Ihr Wiener Familienbetrieb seit Generationen."
+        lede="Fischerauto wurde 1974 von Franz und Monika Fischer gegründet. Heute arbeiten mehrere Generationen und ein erfahrenes Team im vollintegrierten Händlerbetrieb zusammen."
       />
 
       <section className="bg-ink px-6 py-20 sm:px-12 sm:py-24 lg:px-20">
@@ -34,34 +30,37 @@ export default function UnternehmenPage() {
             <p className="eyebrow text-mute">Selbstverständnis</p>
             <div className="serif mt-6 space-y-6 text-lg leading-relaxed text-bone/85 sm:text-xl">
               <p>
-                Unsere Arbeit lebt von Diskretion und Sorgfalt. Wir kaufen,
-                vermitteln und betreuen Fahrzeuge, deren Geschichte wir kennen
-                und deren technischen Zustand wir verantworten können.
+                Wertvolle Erfahrung, Tradition und Beständigkeit sind bei
+                Fischerauto keine Floskeln. Seit 1974 ist der Betrieb in
+                Familienhand und wächst mit den Anforderungen seiner Kundinnen
+                und Kunden.
               </p>
               <p>
-                Der Bestand ist klein und kuratiert. Jedes Auto wird persönlich
-                begutachtet, dokumentiert und — sofern nötig — von vertrauten
-                Werkstätten vorbereitet. Wir verkaufen keine Versprechungen,
-                sondern Fahrzeuge mit nachvollziehbarer Herkunft.
+                Das Team ist seit Jahren in der Branche tätig und für Fragen
+                rund um Verkauf, Service, Reparatur, Teile, Garantie,
+                Finanzierung und Versicherung vorbereitet.
               </p>
               <p>
-                Kunden kommen seit Jahrzehnten zu uns zurück. Wir bewahren
-                diesen Anspruch — durch klare Auswahl, klare Worte, klare
-                Preise.
+                Kundenparkplatz, Ausstellungsflächen im Untergeschoß und auf
+                dem Dach sowie eine modern ausgestattete Werkstatt machen den
+                Standort in der Wagramer Straße zu einem Autohaus mit kurzen
+                Wegen.
               </p>
             </div>
           </div>
           <aside className="lg:col-span-5">
-            <ParallaxImage
-              src={portrait.src}
-              srcAvif={portrait.srcAvif}
-              alt={portrait.alt}
-              width={portrait.width}
-              height={portrait.height}
-              className="aspect-[3/4]"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/fischerauto/team.png"
+              alt="Fischerauto Team im Schauraum"
+              width={1000}
+              height={606}
+              loading="lazy"
+              decoding="async"
+              className="aspect-[4/3] w-full object-cover"
             />
             <p className="mt-4 text-xs uppercase tracking-[0.2em] text-mute">
-              Manfred Meyer · Inhaber
+              Team Fischerauto · Wagramer Straße 36A
             </p>
           </aside>
         </div>
@@ -83,33 +82,31 @@ export default function UnternehmenPage() {
       <section className="bg-ink px-6 py-20 sm:px-12 sm:py-24 lg:px-20">
         <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="eyebrow text-mute">Leistungen</p>
+            <p className="eyebrow text-mute">Team</p>
             <h2 className="serif mt-3 text-3xl text-bone sm:text-4xl">
-              Was wir tun.
+              Ansprechpartner.
             </h2>
           </div>
-          <div className="grid grid-cols-1 gap-x-12 gap-y-10 sm:grid-cols-2 lg:col-span-8">
-            {[
-              {
-                t: "An- und Verkauf",
-                d: "Vermittlung ausgewählter Sammlerfahrzeuge mit dokumentierter Historie. Ankauf einzelner Stücke und kompletter Sammlungen.",
-              },
-              {
-                t: "Suchaufträge",
-                d: "Auf Wunsch suchen wir gezielt nach einem bestimmten Modell, einer Lackierung, einer Spezifikation. Diskret, mit europaweitem Netzwerk.",
-              },
-              {
-                t: "Konsignation",
-                d: "Wir präsentieren Ihr Fahrzeug einem ausgewählten Kundenkreis. Auf Wunsch übernehmen wir Aufbereitung und Dokumentation.",
-              },
-              {
-                t: "Beratung",
-                d: "Einschätzung von Marktwert, Originalität und Zustand — auch unabhängig von einer konkreten Transaktion.",
-              },
-            ].map((l) => (
-              <div key={l.t}>
-                <h3 className="serif text-2xl text-bone">{l.t}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-mute">{l.d}</p>
+          <div className="space-y-12 lg:col-span-8">
+            {TEAM.map((group) => (
+              <div key={group.group}>
+                <h3 className="serif text-2xl text-bone">{group.group}</h3>
+                <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {group.people.map((person) => (
+                    <div
+                      key={person.name}
+                      className="border border-line bg-bone/[0.03] p-5"
+                    >
+                      <p className="font-medium text-bone">{person.name}</p>
+                      <p className="mt-1 text-sm text-mute">{person.role}</p>
+                      {"contact" in person && person.contact ? (
+                        <p className="mt-3 text-xs leading-relaxed text-bone/75">
+                          {person.contact}
+                        </p>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

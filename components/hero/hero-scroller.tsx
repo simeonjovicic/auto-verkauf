@@ -10,7 +10,7 @@ export function HeroScroller() {
   return (
     <section
       ref={sectionRef}
-      aria-label="Aktuelle Fahrzeuge"
+      aria-label="Fischerauto Startseite"
       className="relative h-screen w-full overflow-hidden"
     >
       <BackgroundGradient />
@@ -19,7 +19,7 @@ export function HeroScroller() {
         href="#philosophie"
         className="sr-only focus:not-sr-only focus:absolute focus:bottom-6 focus:left-1/2 focus:z-30 focus:-translate-x-1/2 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-xs focus:uppercase focus:tracking-[0.2em] focus:text-bone"
       >
-        Animation überspringen
+        Startbereich überspringen
       </a>
     </section>
   );

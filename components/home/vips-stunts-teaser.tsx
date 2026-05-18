@@ -12,35 +12,35 @@ type Card = {
 const CARDS: Card[] = [
   {
     href: "/service",
-    eyebrow: "Sammlerservice",
+    eyebrow: "Werkstatt & Annahme",
     title: "Service",
     copy:
-      "Konsignation, Suchaufträge, Garage und Verkauf in Ihrem Namen — diskret und persönlich seit den frühen 1980ern.",
+      "Pickerl, Inspektion, Reparatur aller Fabrikate, Karosserie, Reifen, Elektrik und Ersatzwagen direkt am Standort.",
     imageSrc: "/service-bg.jpg",
     imageAlt: "Mechaniker bei der Arbeit an einem Auto",
   },
   {
-    href: "/stunts",
-    eyebrow: "Film & TV",
-    title: "Stunts",
+    href: "/virtueller-rundgang",
+    eyebrow: "Rundgang & Medien",
+    title: "Einblicke",
     copy:
-      "Bereitstellung und Vorbereitung von Sport- und Sammlerfahrzeugen für internationale Filmproduktionen.",
-    imageSrc: "/stunt-bg.jpg",
-    imageAlt: "Ford Mustang driftet auf einer Teststrecke",
+      "Virtueller Rundgang, Videos und Download-Bereich werden auf der neuen Seite gebündelt und leicht auffindbar gemacht.",
+    imageSrc: "/fischerauto/team.png",
+    imageAlt: "Fischerauto Team im Schauraum",
   },
 ];
 
-export function VipsStuntsTeaser() {
+export function ServiceMediaTeaser() {
   return (
     <section
       className="relative border-t border-line bg-ink text-bone"
-      aria-label="Service und Stunts"
+      aria-label="Service und Einblicke"
     >
       <div className="mx-auto max-w-360 px-6 py-20 sm:px-12 lg:px-20 lg:py-28">
         <p className="eyebrow text-gold!">Leistungen</p>
         <h2 className="serif mt-6 max-w-3xl text-4xl leading-[1.05] text-bone sm:text-5xl lg:text-6xl">
-          Mehr als Verkauf:{" "}
-          <span className="italic text-bone/55">Fahrzeuge mit Einsatzgeschichte.</span>
+          Alles unter einem Dach:{" "}
+          <span className="italic text-bone/55">Verkauf, Werkstatt und persönliche Betreuung.</span>
         </h2>
         <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
           {CARDS.map((c) => {

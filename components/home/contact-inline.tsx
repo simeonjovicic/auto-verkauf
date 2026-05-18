@@ -15,12 +15,12 @@ export function ContactInline() {
             id="kontakt-title"
             className="serif mt-6 text-4xl leading-[1.05] text-bone sm:text-5xl lg:text-6xl"
           >
-            Termin <span className="italic text-bone/55">nach Vereinbarung.</span>
+            Direkt nach Donaustadt.{" "}
+            <span className="italic text-bone/55">Oder direkt anrufen.</span>
           </h2>
           <p className="mt-8 max-w-prose text-base leading-relaxed text-mute sm:text-lg">
-            Besichtigungen und Probefahrten organisieren wir persönlich.
-            Rufen Sie uns an oder senden Sie eine Anfrage — wir antworten in
-            der Regel innerhalb eines Werktags.
+            Ob Neuwagen, Service, Reparatur oder Eintauschwagen: Ihre Anfrage
+            landet beim Team vor Ort in der Wagramer Straße 36A.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
@@ -44,16 +44,10 @@ export function ContactInline() {
               {SITE.address.street}
               <br />
               {SITE.address.postal}, {SITE.address.country}
-              <br />
-              <span className="text-mute">{SITE.address.entrance}</span>
             </Block>
             <Block label="Telefon">
               <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="hover:text-gold">
                 {SITE.phoneDisplay}
-              </a>
-              <br />
-              <a href={`tel:${SITE.mobile.replace(/\s/g, "")}`} className="hover:text-gold">
-                {SITE.mobileDisplay}
               </a>
             </Block>
             <Block label="E-Mail">

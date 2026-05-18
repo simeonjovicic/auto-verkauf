@@ -3,6 +3,7 @@ import type { Vehicle } from "@/lib/vehicles";
 import { VehicleHero } from "./vehicle-hero";
 import { SpecTable } from "./spec-table";
 import { InquiryCta } from "./inquiry-cta";
+import { SITE, WILLHABEN_URL } from "@/lib/site";
 
 type DetailMode = "page" | "drawer";
 
@@ -47,21 +48,19 @@ export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
             <div className="mt-6 max-w-[760px]">
               <h2 className="serif text-4xl leading-tight text-bone sm:text-5xl">
                 {vehicle.name} {vehicle.subtitle}: klar dokumentiert, sofort
-                einordbar.
+                anfragbar.
               </h2>
             </div>
             <div className="serif mt-8 space-y-6 text-lg leading-relaxed text-bone/82 sm:text-xl">
               <p>
-                Dieses Fahrzeug wird nicht nur als Bild verkauft, sondern als
-                vollständiges Paket: Zustand, Historie, Ausstattung und
-                technische Einordnung werden vor einer Besichtigung transparent
-                vorbereitet.
+                Bei Fischerauto wird jedes Angebot persönlich besprochen:
+                Ausstattung, Verfügbarkeit, Finanzierung, Versicherung und
+                die nächsten Schritte bis zur Probefahrt.
               </p>
               <p>
-                Sie erhalten vorab die relevanten Eckdaten und vor Ort einen
-                ruhigen, nachvollziehbaren Rundgang am Fahrzeug. Keine
-                Showroom-Hektik, sondern ein klarer Blick auf das Auto und
-                seine Substanz.
+                Bei Eintausch- und Gebrauchtwagen geht es zusätzlich um
+                Garantie, Überprüfung und nachvollziehbare Eckdaten. Der
+                tagesaktuelle Bestand wird laufend auf willhaben gepflegt.
               </p>
             </div>
 
@@ -80,9 +79,9 @@ export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
 
             <div className="mt-14 grid grid-cols-1 gap-8 border-y border-line py-10 sm:grid-cols-3">
               {[
-                ["01", "Historie", "Unterlagen, Serviceeinträge und bekannte Besitzdaten werden strukturiert durchgesehen."],
-                ["02", "Zustand", "Lack, Innenraum, Technik und Verschleissteile werden vor Ort gemeinsam eingeordnet."],
-                ["03", "Entscheidung", "Besichtigung, Probefahrt und nächste Schritte werden ohne Zeitdruck geplant."],
+                ["01", "Beratung", "Modell, Ausstattung, Lieferzeit und Budget werden direkt mit dem Team geklärt."],
+                ["02", "Besichtigung", "Probefahrt, Schauraumtermin oder Gebrauchtwagencheck werden passend vorbereitet."],
+                ["03", "Abwicklung", "Finanzierung, Leasing, Versicherung, Service und Ersatzwagen bleiben unter einem Dach."],
               ].map(([num, title, copy]) => (
                 <div key={num}>
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
@@ -104,27 +103,36 @@ export function VehicleDetailContent({ vehicle, mode = "page" }: Props) {
           <aside className={isDrawer ? "xl:col-span-5" : "lg:col-span-5"}>
             <SpecTable vehicle={vehicle} />
             <div className="mt-12 border border-line bg-bone/[0.03] p-6">
-              <p className="eyebrow text-mute">Besichtigung</p>
+              <p className="eyebrow text-mute">Vor Ort</p>
               <p className="serif mt-4 text-2xl leading-tight text-bone">
-                Vor Ort sehen, hören und sauber einordnen.
+                Wagramer Straße 36A, 1220 Wien.
               </p>
               <p className="mt-4 text-sm leading-relaxed text-mute">
-                Wir reservieren ausreichend Zeit für Fahrzeugrundgang,
-                Dokumenteneinsicht und eine klare Einschätzung der nächsten
-                Schritte.
+                Kundenparkplatz, Schauraumflächen im Untergeschoß und auf dem
+                Dach sowie persönliche Ansprechpartner für Verkauf und Service.
               </p>
+              {vehicle.brand === "Gebrauchtwagen" ? (
+                <a
+                  href={WILLHABEN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex text-[11px] uppercase tracking-[0.2em] text-bone hover:text-gold"
+                >
+                  Live-Bestand auf willhaben ansehen →
+                </a>
+              ) : null}
             </div>
             <div className="mt-12">
               <p className="eyebrow text-mute">Standort</p>
               <p className="mt-4 text-sm leading-relaxed text-bone">
-                Meyer Motorsport
+                {SITE.name}
                 <br />
-                Himberger Strasse 45
+                {SITE.address.street}
                 <br />
-                1100 Wien, Österreich
+                {SITE.address.postal} {SITE.address.city}, {SITE.address.country}
               </p>
               <p className="mt-2 text-xs text-mute">
-                Einfahrt Franzosenweg 2 · Termin nach Vereinbarung
+                Verkauf, Service, Teile und Finanzierung am selben Standort
               </p>
             </div>
           </aside>

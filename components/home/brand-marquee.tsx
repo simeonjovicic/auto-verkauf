@@ -1,10 +1,11 @@
 export function BrandMarquee() {
   const brands = [
-    { name: "Ferrari", icon: "https://cdn.simpleicons.org/ferrari/ffffff" },
-    { name: "Lamborghini", icon: "https://cdn.simpleicons.org/lamborghini/ffffff" },
-    { name: "Porsche", icon: "https://cdn.simpleicons.org/porsche/ffffff" },
-    { name: "BMW", icon: "https://cdn.simpleicons.org/bmw/ffffff" },
-    { name: "Mercedes-Benz", icon: "https://cdn.worldvectorlogo.com/logos/mercedes-benz-5.svg" },
+    { name: "Hyundai", icon: "/fischerauto/hyundai_logo.png" },
+    { name: "Mitsubishi", icon: null },
+    { name: "Verkauf", icon: null },
+    { name: "Service", icon: null },
+    { name: "Teile", icon: null },
+    { name: "Finanzierung", icon: null },
   ];
 
   // Duplicate the array to ensure seamless infinite scrolling
@@ -24,15 +25,19 @@ export function BrandMarquee() {
               key={i}
               className="flex items-center gap-6 opacity-60 transition-opacity hover:opacity-100"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={brand.icon}
-                alt={`${brand.name} Logo`}
-                className="h-10 w-auto object-contain sm:h-12"
-                loading="lazy"
-                decoding="async"
-                draggable={false}
-              />
+              {brand.icon ? (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={brand.icon}
+                    alt={`${brand.name} Logo`}
+                    className="h-8 w-auto object-contain sm:h-10"
+                    loading="lazy"
+                    decoding="async"
+                    draggable={false}
+                  />
+                </>
+              ) : null}
               <span className="serif text-xl tracking-widest text-bone sm:text-2xl">
                 {brand.name.toUpperCase()}
               </span>

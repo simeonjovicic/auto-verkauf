@@ -10,14 +10,19 @@ export function Footer() {
         {/* Brand */}
         <div className="lg:col-span-4">
           <Link href="/" className="inline-flex items-center gap-3 text-bone">
-            <span className="flex h-8 w-8 items-center justify-center border border-bone/40">
-              <span className="serif text-base leading-none">M</span>
-            </span>
-            <span className="serif text-lg">{SITE.name}</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/fischerauto/logo.png"
+              alt="Fischerauto Logo"
+              className="h-8 w-auto object-contain"
+              loading="lazy"
+              decoding="async"
+            />
           </Link>
           <p className="mt-6 max-w-[36ch] text-sm leading-relaxed text-mute">
-            Handverlesene Sammlerfahrzeuge in Wien. Seit über 20 Jahren
-            spezialisiert auf Ferrari, Porsche und ausgewählte M-Modelle.
+            Wiener Familienbetrieb seit 1974. Hyundai und Mitsubishi,
+            geprüfte Eintauschwagen, Werkstatt, Teile, Finanzierung und
+            Leasing unter einem Dach.
           </p>
         </div>
 
@@ -31,7 +36,7 @@ export function Footer() {
             <div>
               {SITE.address.postal}, {SITE.address.country}
             </div>
-            <div className="text-mute">{SITE.address.entrance}</div>
+            <div className="text-mute">{SITE.address.district}</div>
           </address>
           <ul className="mt-5 space-y-2 text-sm">
             <li>
@@ -40,14 +45,6 @@ export function Footer() {
                 className="text-bone/90 transition-colors hover:text-gold"
               >
                 {SITE.phoneDisplay}
-              </a>
-            </li>
-            <li>
-              <a
-                href={`tel:${SITE.mobile.replace(/\s/g, "")}`}
-                className="text-bone/90 transition-colors hover:text-gold"
-              >
-                {SITE.mobileDisplay}
               </a>
             </li>
             <li>
@@ -64,13 +61,11 @@ export function Footer() {
 
         {/* Bestand */}
         <div className="lg:col-span-2">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-mute">
-            Bestand
-          </p>
+          <p className="text-[11px] uppercase tracking-[0.22em] text-mute">Autohaus</p>
           <ul className="mt-4 space-y-2 text-sm text-bone/90">
             <li>
               <Link href="/fahrzeuge" className="transition-colors hover:text-gold">
-                Stock
+                Fahrzeuge
               </Link>
             </li>
             <li>
@@ -94,12 +89,12 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-bone/90">
             <li>
               <Link href="/insights" className="transition-colors hover:text-gold">
-                Insights
+                Aktuelles
               </Link>
             </li>
             <li>
-              <Link href="/stunts" className="transition-colors hover:text-gold">
-                Stunts &amp; Picture Cars
+              <Link href="/virtueller-rundgang" className="transition-colors hover:text-gold">
+                Videos &amp; Rundgang
               </Link>
             </li>
             <li>
@@ -119,13 +114,13 @@ export function Footer() {
       <div className="border-t border-line">
         <div className="mx-auto flex max-w-360 flex-col items-start justify-between gap-2 px-6 py-6 text-[11px] uppercase tracking-[0.22em] text-mute sm:flex-row sm:items-center sm:px-12 lg:px-20">
           <p>
-            © {SITE.owner} {year}. Alle Rechte vorbehalten.
+            © {SITE.legalName} {year}. Alle Rechte vorbehalten.
           </p>
           <div className="flex items-center gap-6">
             <Link href="/impressum" className="transition-colors hover:text-gold">
               Impressum
             </Link>
-            <Link href="/impressum" className="transition-colors hover:text-gold">
+            <Link href="/datenschutzerklaerung" className="transition-colors hover:text-gold">
               Datenschutz
             </Link>
           </div>

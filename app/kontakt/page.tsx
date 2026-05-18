@@ -7,7 +7,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Kontakt",
   description:
-    "Meyer Motorsport — Himberger Strasse 45, 1100 Wien. Anfragen werden persönlich und vertraulich beantwortet.",
+    "Fischerauto — Wagramer Straße 36A, 1220 Wien. Kontakt für Verkauf, Service, Reparatur, Teile und Gebrauchtwagen.",
 };
 
 export default function KontaktPage() {
@@ -15,8 +15,8 @@ export default function KontaktPage() {
     <>
       <PageHero
         eyebrow="Kontakt"
-        title="Sprechen Sie mit uns."
-        lede="Termin nach Vereinbarung. Anfragen werden persönlich beantwortet — meist innerhalb desselben Tages."
+        title="Sprechen Sie mit Fischerauto."
+        lede="Verkauf, Serviceannahme, Werkstätte und Teilelager sind direkt am Standort in Wien-Donaustadt erreichbar."
       />
 
       <section className="bg-ink px-6 py-20 sm:px-12 sm:py-24 lg:px-20">
@@ -44,10 +44,10 @@ export default function KontaktPage() {
                 <dd className="serif mt-3 text-xl text-bone">
                   {SITE.address.street}
                   <br />
-                  {SITE.address.postal}, {SITE.address.country}
+                  {SITE.address.postal} {SITE.address.city}, {SITE.address.country}
                 </dd>
                 <p className="mt-2 text-xs text-mute">
-                  {SITE.address.entrance}
+                  Kundenparkplatz vor Ort · {SITE.address.district}
                 </p>
               </div>
               <div>
@@ -60,33 +60,33 @@ export default function KontaktPage() {
                     >
                       {SITE.phoneDisplay}
                     </a>
-                    <span className="ml-2 text-mute">· Festnetz</span>
+                    <span className="ml-2 text-mute">· Zentrale</span>
                   </p>
-                  <p>
-                    <a
-                      href={`tel:${SITE.mobile.replace(/\s/g, "")}`}
-                      className="hover:text-gold"
-                    >
-                      {SITE.mobileDisplay}
-                    </a>
-                    <span className="ml-2 text-mute">· Mobil</span>
-                  </p>
+                  <p className="text-mute">Fax · {SITE.faxDisplay}</p>
                 </dd>
               </div>
               <div>
                 <dt className="eyebrow text-mute">E-Mail</dt>
                 <dd className="mt-3 text-sm text-bone">
-                  <a
-                    href={`mailto:${SITE.email}`}
-                    className="hover:text-gold"
-                  >
+                  <a href={`mailto:${SITE.email}`} className="hover:text-gold">
                     {SITE.email}
                   </a>
                 </dd>
               </div>
               <div>
                 <dt className="eyebrow text-mute">Öffnungszeiten</dt>
-                <dd className="mt-3 text-sm text-bone">{SITE.hours}</dd>
+                <dd className="mt-4 space-y-5 text-sm text-bone">
+                  {SITE.openingHours.map((block) => (
+                    <div key={block.label}>
+                      <p className="font-medium">{block.label}</p>
+                      <ul className="mt-1 space-y-1 text-mute">
+                        {block.lines.map((line) => (
+                          <li key={line}>{line}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </dd>
               </div>
             </dl>
           </aside>
@@ -97,12 +97,12 @@ export default function KontaktPage() {
         <div className="mx-auto max-w-[1440px]">
           <p className="eyebrow text-mute">Anfahrt</p>
           <h2 className="serif mt-3 text-3xl text-bone sm:text-4xl">
-            Wien-Favoriten.
+            Wien-Donaustadt.
           </h2>
           <div className="mt-10 aspect-[16/9] overflow-hidden border border-line">
             <iframe
-              title="Standort Meyer Motorsport auf Google Maps"
-              src="https://www.google.com/maps?q=Himberger+Strasse+45,+1100+Wien&output=embed"
+              title="Standort Fischerauto auf Google Maps"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(SITE.googleMapsQuery)}&output=embed`}
               className="h-full w-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

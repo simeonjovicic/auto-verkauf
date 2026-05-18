@@ -1,52 +1,52 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/layout/page-hero";
 import Link from "next/link";
-import { vehicles } from "@/lib/vehicles";
+import { PageHero } from "@/components/layout/page-hero";
 
 export const metadata: Metadata = {
-  title: "Stunts",
+  title: "Videos & Rundgang",
   description:
-    "Fahrzeuge und Fahrkönnen für Film, Werbung und Stunts. Meyer Motorsport — Wiener Erfahrung seit über 40 Jahren.",
+    "Videos, virtueller Rundgang, Downloads und Newsletter-Einstieg für Fischerauto in Wien-Donaustadt.",
 };
 
-const showcase =
-  vehicles.find((v) => v.slug === "porsche-718-spyder-4-0") ?? vehicles[0];
-
-const PRODUCTIONS = [
-  { year: "2023", title: "Internationale TV-Werbung", role: "Picture car" },
-  { year: "2021", title: "Spielfilmproduktion (ORF)", role: "Stunt coordination" },
-  { year: "2019", title: "Premium-Automotive Spot", role: "Fleet & driver" },
-  { year: "2017", title: "Musikvideo", role: "Picture car" },
+const MEDIA_AREAS = [
+  {
+    t: "Videos",
+    d: "Modellvideos, Aktionsclips und Einblicke aus dem Autohaus können hier gebündelt werden.",
+  },
+  {
+    t: "Virtueller Rundgang",
+    d: "Der Rundgang durchs Autohaus wird als eigener Einstieg vorbereitet, sobald der neue Embed-Code vorliegt.",
+  },
+  {
+    t: "Downloads",
+    d: "Prospekte, Formulare und Kundeninformationen erhalten einen zentralen Download-Bereich.",
+  },
+  {
+    t: "Newsletter",
+    d: "Die bestehende Mailchimp-Anmeldung wird mit DSGVO-Zustimmung in die neue Seite integriert.",
+  },
 ];
 
-export default function StuntsPage() {
+export default function MedienPage() {
   return (
     <>
       <PageHero
-        eyebrow="Film & Werbung"
-        title="Autos, die ihren Auftritt kennen."
-        lede="Wir stellen Fahrzeuge und Fahrer für Film-, Werbe- und Bühnenproduktionen. Mit Sorgfalt, Versicherung und einer Erfahrung, die nur Jahrzehnte hinter dem Lenkrad bringen."
+        eyebrow="Einblicke"
+        title="Videos, Rundgang und Downloads."
+        lede="Die Inhalte der alten Unterseiten werden auf der neuen Seite sinnvoll gebündelt: Videos, virtueller Rundgang, Download-Bereich und Newsletter-Anmeldung."
       />
 
       <section className="relative bg-ink">
         <div className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">
-          <picture>
-            <source srcSet={showcase.srcAvif} type="image/avif" />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={showcase.src}
-              alt={showcase.alt}
-              width={showcase.width}
-              height={showcase.height}
-              draggable={false}
-              className="h-full w-full object-cover select-none"
-              style={{
-                backgroundImage: `url(${showcase.blurDataURL})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
-          </picture>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/fischerauto/team.png"
+            alt="Fischerauto Team im Schauraum"
+            width={1000}
+            height={606}
+            draggable={false}
+            className="h-full w-full object-cover select-none"
+          />
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/60"
@@ -57,30 +57,13 @@ export default function StuntsPage() {
       <section className="bg-ink px-6 py-20 sm:px-12 sm:py-24 lg:px-20">
         <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-x-16 gap-y-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <p className="eyebrow text-mute">Leistungen</p>
+            <p className="eyebrow text-mute">Unterseiten</p>
             <h2 className="serif mt-3 text-balance text-4xl text-bone sm:text-5xl">
-              Vom Picture-Car bis zur kompletten Crew.
+              Alles, was nicht täglich wechselt.
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-x-12 gap-y-12 sm:grid-cols-2 lg:col-span-7">
-            {[
-              {
-                t: "Picture Cars",
-                d: "Sportwagen, Klassiker, Alltagsfahrzeuge — in Top-Zustand und mit gültiger Drehgenehmigung.",
-              },
-              {
-                t: "Stunt Coordination",
-                d: "Inhaber Manfred Meyer fährt selbst — oder vermittelt erfahrene Stuntfahrer für anspruchsvolle Szenen.",
-              },
-              {
-                t: "Logistik",
-                d: "Transport, Set-Vorbereitung, Versicherung. Wir liefern fahrbereit zur vereinbarten Zeit.",
-              },
-              {
-                t: "Beratung",
-                d: "Welche Modelle passen zum Drehbuch? Wir helfen bei Auswahl, Casting und Budget.",
-              },
-            ].map((l) => (
+            {MEDIA_AREAS.map((l) => (
               <div key={l.t}>
                 <h3 className="serif text-2xl text-bone">{l.t}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-mute">{l.d}</p>
@@ -93,41 +76,45 @@ export default function StuntsPage() {
       <section className="border-y border-line bg-ink px-6 py-20 sm:px-12 sm:py-24 lg:px-20">
         <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="eyebrow text-mute">Auswahl</p>
+            <p className="eyebrow text-mute">Newsletter</p>
             <h2 className="serif mt-3 text-3xl text-bone sm:text-4xl">
-              Produktionen.
+              Anmeldung vorbereiten.
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-mute">
-              Eine Auswahl. Vollständige Referenzen und Showreel auf Anfrage.
+              Felder: Vorname, Nachname, E-Mail und DSGVO-Zustimmung. Die
+              technische Anbindung bleibt Mailchimp.
             </p>
           </div>
-          <ul className="divide-y divide-line border-y border-line lg:col-span-8">
-            {PRODUCTIONS.map((p) => (
-              <li
-                key={p.title}
-                className="grid grid-cols-12 gap-4 py-6 text-sm"
-              >
-                <span className="col-span-2 text-mute">{p.year}</span>
-                <span className="col-span-7 text-bone">{p.title}</span>
-                <span className="col-span-3 text-right text-mute">
-                  {p.role}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <div className="border border-line p-6 lg:col-span-8 sm:p-8">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+              {["Vorname", "Nachname", "E-Mail ·"].map((label) => (
+                <label key={label}>
+                  <span className="eyebrow text-mute">{label}</span>
+                  <input
+                    className="mt-2 w-full border border-line bg-transparent px-4 py-3 text-sm text-bone focus:border-bone focus:outline-none"
+                    disabled
+                  />
+                </label>
+              ))}
+            </div>
+            <label className="mt-6 flex gap-3 text-sm leading-relaxed text-mute">
+              <input className="mt-1 h-4 w-4 accent-gold" disabled type="checkbox" />
+              <span>DSGVO-Zustimmung · Mailchimp-Anbindung vor Launch einsetzen.</span>
+            </label>
+          </div>
         </div>
       </section>
 
       <section className="bg-ink px-6 py-20 sm:px-12 sm:py-24 lg:px-20">
         <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="eyebrow text-mute">Briefing</p>
+            <p className="eyebrow text-mute">Nächster Schritt</p>
             <h2 className="serif mt-3 text-balance text-4xl text-bone sm:text-5xl">
-              Drehbuch in der Schublade?
+              Embed-Codes und Download-Dateien ergänzen.
             </h2>
             <p className="mt-6 max-w-[52ch] text-base leading-relaxed text-mute sm:text-lg">
-              Erzählen Sie uns von Ihrer Produktion. Wir antworten schnell — und
-              ehrlich, falls wir der falsche Partner sind.
+              Sobald Rundgang, Videos, Prospekte und Formulare vorliegen, können
+              sie hier ohne Strukturänderung eingesetzt werden.
             </p>
           </div>
           <div className="flex flex-col gap-3 lg:col-span-5 lg:items-end lg:justify-end">
@@ -135,7 +122,7 @@ export default function StuntsPage() {
               href="/kontakt/"
               className="inline-flex items-center justify-center bg-bone px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold"
             >
-              Anfrage senden →
+              Kontakt aufnehmen →
             </Link>
           </div>
         </div>

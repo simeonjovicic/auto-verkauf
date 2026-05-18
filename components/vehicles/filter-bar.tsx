@@ -21,7 +21,7 @@ export type Filters = {
   sort: Sort;
 };
 
-const BRAND_OPTIONS: Brand[] = ["Ferrari", "Porsche", "BMW"];
+const BRAND_OPTIONS: Brand[] = ["Hyundai", "Mitsubishi", "Gebrauchtwagen"];
 
 const SORT_LABELS: Record<Sort, string> = {
   newest: "Neu zuerst",

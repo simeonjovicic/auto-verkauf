@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { getVehicleSlugs } from "@/lib/vehicles";
 import { getInsightSlugs } from "@/lib/insights";
+import { SITE } from "@/lib/site";
 
 export const dynamic = "force-static";
 
-const BASE = "https://www.meyer-motorsport.at";
+const BASE = SITE.baseUrl;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -16,9 +17,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/service/`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     { url: `${BASE}/insights/`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/unternehmen/`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
-    { url: `${BASE}/stunts/`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${BASE}/videos/`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
+    { url: `${BASE}/virtueller-rundgang/`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
+    { url: `${BASE}/download/`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
     { url: `${BASE}/kontakt/`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     { url: `${BASE}/impressum/`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${BASE}/datenschutzerklaerung/`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${BASE}/teilnahmebedingung/`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
   ];
 
   const vehicleRoutes: MetadataRoute.Sitemap = getVehicleSlugs().map((slug) => ({

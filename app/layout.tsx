@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter_Tight, Fraunces } from "next/font/google";
 import { Header } from "@/components/nav/header";
 import { Footer } from "@/components/footer/footer";
+import { SITE } from "@/lib/site";
 import "./globals.css";
 
 const interTight = Inter_Tight({
@@ -18,29 +19,29 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.meyer-motorsport.at"),
+  metadataBase: new URL(SITE.baseUrl),
   title: {
-    default: "Meyer Motorsport — Exklusive Sportwagen in Wien",
-    template: "%s · Meyer Motorsport",
+    default: "Fischerauto — Hyundai und Mitsubishi in Wien",
+    template: "%s · Fischerauto",
   },
   description:
-    "Meyer Motorsport in Wien. Handverlesene Ferrari, Porsche und BMW M Sammlerstücke. Seit über 40 Jahren.",
+    "Fischerauto in Wien-Donaustadt. Hyundai und Mitsubishi Neuwagen, geprüfte Eintauschwagen, Service, Werkstatt, Teile, Finanzierung und Leasing seit 1974.",
   openGraph: {
     type: "website",
     locale: "de_AT",
-    siteName: "Meyer Motorsport",
+    siteName: SITE.name,
     images: [
       {
-        url: "/cars/ferrari-458-speciale-aperta.jpg",
-        width: 1261,
-        height: 946,
-        alt: "Ferrari 458 Speciale Aperta — Meyer Motorsport",
+        url: "/fischerauto/ioniq-9.jpg",
+        width: 2339,
+        height: 1511,
+        alt: "Hyundai IONIQ 9 bei Fischerauto",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/cars/ferrari-458-speciale-aperta.jpg"],
+    images: ["/fischerauto/ioniq-9.jpg"],
   },
   alternates: {
     canonical: "/",

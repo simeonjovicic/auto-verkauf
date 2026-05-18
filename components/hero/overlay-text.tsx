@@ -1,10 +1,10 @@
 "use client";
 
 const STATS = [
-  { value: "25+", label: "Fahrzeuge auf Lager" },
-  { value: "Exklusiv", label: "Supersportwagen" },
-  { value: "15 Jahre", label: "Erfahrung" },
-  { value: "EU-weit", label: "Lieferung möglich" },
+  { value: "1974", label: "in Familienhand" },
+  { value: "Hyundai", label: "Hauptmarke" },
+  { value: "Mitsubishi", label: "Neuwagen & Service" },
+  { value: "1220", label: "Wien-Donaustadt" },
 ] as const;
 
 export function OverlayText() {
@@ -17,12 +17,10 @@ export function OverlayText() {
           style={{ textShadow: "0 2px 32px rgba(0,0,0,0.85)" }}
         >
           <h1 className="text-5xl font-black uppercase leading-[0.88] tracking-tight sm:text-7xl lg:text-[7.5rem]">
-            Getrieben von
-            <br />
-            Exzellenz.
+            Fischerauto.
           </h1>
           <p className="mt-5 text-[11px] uppercase tracking-[0.28em] text-bone/90 sm:mt-6">
-            Die feinsten Automobile Wiens
+            Ihr Wiener Familienbetrieb seit Generationen
           </p>
 
           <div className="pointer-events-auto mt-8 flex flex-wrap items-center gap-4 sm:mt-10 sm:gap-6">
@@ -30,13 +28,13 @@ export function OverlayText() {
               href="/fahrzeuge"
               className="inline-flex h-12 items-center bg-bone px-7 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink transition-opacity hover:opacity-90"
             >
-              Alle Fahrzeuge
+              Fahrzeuge ansehen
             </a>
             <a
-              href="/kontakt"
+              href="/service"
               className="group inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-bone transition-colors hover:text-gold"
             >
-              <span>Fahrzeug verkaufen</span>
+              <span>Service anfragen</span>
               <span className="transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   BadgeCheck,
   CarFront,
-  Gauge,
+  HeartHandshake,
   MapPin,
   type LucideIcon,
 } from "lucide-react";
@@ -43,32 +43,31 @@ const STATS: Stat[] = [
   {
     type: "count",
     label: "Erfahrung",
-    end: 40,
+    end: 50,
     suffix: "+",
     icon: BadgeCheck,
-    detail: "Jahre Sportwagen in Wien",
+    detail: "Jahre Familienbetrieb in Wien",
   },
   {
     type: "count",
-    label: "Bestand",
-    end: 30,
-    prefix: "ca. ",
+    label: "Gründung",
+    end: 1974,
     icon: CarFront,
-    detail: "Fahrzeuge pro Jahr",
+    detail: "von Franz und Monika Fischer",
   },
   {
     type: "text",
     label: "Standort",
-    value: "Wien",
+    value: "1220",
     icon: MapPin,
-    detail: "Besichtigung nach Termin",
+    detail: "Wagramer Straße 36A",
   },
   {
     type: "brands",
-    label: "Fokus",
-    brands: ["Ferrari", "Porsche", "BMW M"],
-    icon: Gauge,
-    detail: "Sportwagen mit Historie",
+    label: "Marken",
+    brands: ["Hyundai", "Mitsubishi"],
+    icon: HeartHandshake,
+    detail: "Verkauf, Service und Teile",
   },
 ];
 

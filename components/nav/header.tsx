@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { MobileMenu } from "./mobile-menu";
+import { SITE } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -22,29 +23,37 @@ export function Header() {
           <Link
             href="/"
             className="flex items-center gap-3"
-            aria-label="Meyer Motorsport — Startseite"
+            aria-label="Fischerauto — Startseite"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
-              src="/brand/logo.jpg" 
-              alt="Meyer Motorsport Logo" 
-              className="h-10 w-auto object-contain mix-blend-screen"
+              src="/fischerauto/logo.png" 
+              alt="Fischerauto Logo" 
+              className="h-9 w-auto object-contain drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]"
             />
           </Link>
 
-          <button
-            type="button"
-            aria-label={open ? "Menü schließen" : "Menü öffnen"}
-            aria-expanded={open}
-            onClick={() => setOpen((o) => !o)}
-            className="text-bone/80 transition-colors hover:text-gold"
-          >
-            {open ? (
-              <X size={20} strokeWidth={1.4} />
-            ) : (
-              <Menu size={20} strokeWidth={1.4} />
-            )}
-          </button>
+          <div className="flex items-center gap-5">
+            <a
+              href={`tel:${SITE.phone}`}
+              className="hidden text-[11px] font-semibold uppercase tracking-[0.18em] text-bone transition-colors hover:text-gold md:inline"
+            >
+              {SITE.phoneDisplay}
+            </a>
+            <button
+              type="button"
+              aria-label={open ? "Menü schließen" : "Menü öffnen"}
+              aria-expanded={open}
+              onClick={() => setOpen((o) => !o)}
+              className="text-bone/80 transition-colors hover:text-gold"
+            >
+              {open ? (
+                <X size={20} strokeWidth={1.4} />
+              ) : (
+                <Menu size={20} strokeWidth={1.4} />
+              )}
+            </button>
+          </div>
         </div>
       </header>
 

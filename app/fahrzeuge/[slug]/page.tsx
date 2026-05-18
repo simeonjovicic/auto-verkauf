@@ -6,7 +6,7 @@ import { SimilarVehicles } from "@/components/vehicle-detail/similar-vehicles";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE } from "@/lib/site";
 
-const BASE = "https://www.meyer-motorsport.at";
+const BASE = SITE.baseUrl;
 
 type Params = { slug: string };
 
@@ -24,7 +24,7 @@ export async function generateMetadata({
   if (!vehicle) return { title: "Fahrzeug nicht gefunden" };
   return {
     title: `${vehicle.name} ${vehicle.subtitle}`,
-    description: `${vehicle.name} ${vehicle.subtitle} bei Meyer Motorsport in Wien — handverlesenes Sammlerstück, Preis auf Anfrage.`,
+    description: `${vehicle.name} ${vehicle.subtitle} bei Fischerauto in Wien-Donaustadt — Beratung, Angebot und Probefahrt direkt anfragen.`,
     openGraph: {
       images: [
         {

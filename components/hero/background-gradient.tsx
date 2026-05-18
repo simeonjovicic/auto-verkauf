@@ -3,7 +3,7 @@ export function BackgroundGradient() {
     <div aria-hidden className="absolute inset-0">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/Hero.jpeg"
+        src="/fischerauto/team.png"
         alt=""
         className="absolute inset-0 h-full w-full object-cover object-center"
         loading="eager"
@@ -15,7 +15,7 @@ export function BackgroundGradient() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 95% 75% at 50% 45%, transparent 35%, rgba(10,10,10,0.45) 85%, rgba(10,10,10,0.92) 100%)",
+            "radial-gradient(ellipse 95% 75% at 58% 45%, transparent 30%, rgba(10,10,10,0.52) 82%, rgba(10,10,10,0.92) 100%)",
         }}
       />
       {/* bottom scrim */}
